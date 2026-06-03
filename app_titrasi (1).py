@@ -176,7 +176,21 @@ if pilih_jenis == "🔴 Titrasi Asam-Basa":
     st.subheader("🔴 Titrasi Asam-Basa")
     col1, col2 = st.columns(2)
 
-    if titran == "Asam Kuat – Basa Kuat":
+    with col1:
+        step(2, "Jenis Titran Asam-Basa")
+        titran = st.radio(
+            "Titran",
+            [
+                "Asam Kuat oleh Basa Kuat",
+                "Asam Lemah oleh Basa Kuat",
+                "Basa Lemah oleh Asam Kuat",
+                "Asam Lemah oleh Basa Lemah",
+            ],
+            label_visibility="collapsed",
+        )
+
+
+    if titran == "Asam Kuat oleh Basa Kuat":
         # pH ≈ 7, kurva curam → banyak pilihan
         card("Bromtimol Biru", ["Rentang pH: 6.0 – 7.6",
              "Perubahan: Kuning → Biru", "Warna hijau akan muncul sebagai warna antara"], "teal", True)
@@ -184,7 +198,7 @@ if pilih_jenis == "🔴 Titrasi Asam-Basa":
              "Perubahan: Tidak berwarna → Pink"], "red")
         
 
-    elif titran == "Basa Lemah – Asam Kuat":
+    elif titran == "Basa Lemah oleh Asam Kuat":
         card("Metil jingga", [ "Rentang pH: 3.1 – 4.4",
              "Perubahan: Kuning → Merah", "Sangat sesuai untuk titik ekuivalen yang bersifat asam"], "orange", True)
         card("Metil Merah", ["Rentang pH: 4.2 – 6.2",
