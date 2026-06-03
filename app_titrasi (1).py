@@ -234,7 +234,7 @@ elif pilih_jenis == "🟡 Titrasi Redoks":
     st.subheader("💡 Rekomendasi Indikator")
 
     if metode == "Permanganometri":
-        card("KMnO₄ — Auto Indicator",
+        card("KMnO₄ — Autoindicator",
             [
                 "KMnO₄ sendiri bertindak sebagai indikator",
                 "Titik akhir: larutan berubah <b>merah muda",
@@ -256,7 +256,6 @@ elif pilih_jenis == "🟡 Titrasi Redoks":
             [
                 "Digunakan pada titrasi redoks yang melibatkan iodin (I₂)",
                 "Perubahan: Biru → Tidak berwarna (saat I₂ habis)",
-                "Konsentrasi: 0.5% – 1% w/v",
             ],
             "teal",
             True,
