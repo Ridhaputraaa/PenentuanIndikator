@@ -214,8 +214,7 @@ if pilih_jenis == "🔴 Titrasi Asam-Basa":
     else:  # Asam Lemah oleh Basa Lemah
         warn(
             "Titrasi asam lemah – basa lemah <b>tidak direkomendasikan</b> secara analitik "
-            "karena tidak memiliki titik ekuivalen yang tajam. sehingga titik akhir titrasi sangat sulit dideteksi menggunakan indikator warna standar."
-        )
+            "karena tidak memiliki titik ekuivalen yang tajam. sehingga titik akhir titrasi sangat sulit dideteksi menggunakan indikator warna standar.")
 
     done()
 
@@ -235,36 +234,28 @@ elif pilih_jenis == "🟡 Titrasi Redoks":
     st.subheader("💡 Rekomendasi Indikator")
 
     if metode == "Permanganometri":
-        card(
-            "KMnO₄ — Self-Indicator",
+        card("KMnO₄ — Auto Indicator",
             [
                 "KMnO₄ sendiri bertindak sebagai indikator",
-                "Titik akhir: larutan berubah <b>merah muda / ungu permanen</b> (≥ 30 detik)",
-                "Titrasi dalam suasana asam (H₂SO₄ encer)",
-            ],
-            "purple",
-            True,
-        )
+                "Titik akhir: larutan berubah <b>merah muda",
+                "Titrasi dalam suasana asam (H₂SO₄ encer)", ],"purple",True,)
+        warn("Penggunaan blanko sangat dianjurkan untuk mengoreksi hasil titrasi.")
         card(
-            "Ferroin (kompleks Fe-fenantrolin)",
+            "Ferroin (1,10-fenantrolin)",
             [
-                "Digunakan untuk titrasi balik",
-                "Perubahan: Merah → Biru-hijau",
-                "Konsentrasi: 0.025 M",
+                "Dalam keadaan tereduksi, kompleks ini berwarna merah pekat.",
+                "Ketika dioksidasi, kompleks ini berubah menjadi berwarna biru pucat (atau biru).",
+                "Perubahan warna ini bersifat reversibel",
             ],
             "red",
-        )
-        warn(
-            "Jangan gunakan HCl sebagai pengasam karena Cl⁻ dapat teroksidasi oleh KMnO₄ "
-            "(reaksi sampingan). Gunakan H₂SO₄ encer."
         )
 
     else:
         card(
             "Larutan Kanji (Amilum)",
             [
-                "Indikator spesifik untuk I₂",
-                "Perubahan: Biru tua → Tidak berwarna (saat I₂ habis)",
+                "Digunakan pada titrasi redoks yang melibatkan iodin (I₂)",
+                "Perubahan: Biru → Tidak berwarna (saat I₂ habis)",
                 "Konsentrasi: 0.5% – 1% w/v",
             ],
             "teal",
