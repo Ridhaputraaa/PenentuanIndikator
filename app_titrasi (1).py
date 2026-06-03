@@ -426,7 +426,7 @@ elif pilih_jenis == "🟢 Titrasi Pengendapan":
 # PLACEHOLDER — belum pilih jenis
 # ─────────────────────────────────────────────
 else:
-    st.info("👆 Pilih jenis titrasi di atas untuk memulai.", icon="ℹ️")
+    st.info("👆 Pilih jenis titrasi di atas untuk memulai.", icon="⚠️")
     st.markdown(
         """
         **Panduan singkat:**
