@@ -279,50 +279,39 @@ elif pilih_jenis == "🟣 Titrasi Kompleksometri":
         "Ca²⁺ / Mg²⁺": [
             ("EBT (Eriochrome Black T)", ["pH 10 — buffer amonia/amonium klorida",
              "Perubahan: Merah anggur → Biru"], "teal", True),
-            ("Murexide", ["pH 12 — untuk Ca²⁺ saja (Mg²⁺ mengendap)",
-             "Perubahan: Merah → Ungu"], "purple", False),
         ],
         "Zn²⁺": [
             ("EBT (Eriochrome Black T)", ["pH 10 — buffer amonia",
              "Perubahan: Merah anggur → Biru"], "teal", True),
-            ("Xylenol Orange", ["pH 5–6 — buffer heksamin/asetat",
-             "Perubahan: Merah-ungu → Kuning"], "orange", False),
+
         ],
         "Cu²⁺": [
-            ("PAN (1-(2-Pyridylazo)-2-naphthol)", ["pH 4–5",
-             "Perubahan: Violet → Kuning", "Pemanasan sedikit mempercepat reaksi"], "purple", True),
-            ("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", False),
+            ("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True,
         ],
         "Fe²⁺ / Fe³⁺": [
-            ("Asam Sulfosalisilat", ["pH 1–2 (untuk Fe³⁺ — suasana sangat asam)",
+            ("Asam salisilat", ["pH 1–2 (untuk Fe³⁺ — suasana sangat asam)",
              "Perubahan: Merah → Tidak berwarna"], "red", True),
             ("Tiron", ["pH 4–10", "Perubahan: Biru → Tidak berwarna"], "teal", False),
         ],
         "Pb²⁺": [
             ("Xylenol Orange", ["pH 5–6 — buffer heksamin",
              "Perubahan: Merah-ungu → Kuning"], "orange", True),
-            ("EBT", ["pH 10", "Perubahan: Merah anggur → Biru"], "teal", False),
         ],
         "Hg²⁺": [
             ("Xylenol Orange", ["pH 2–3 (asam nitrat encer)",
              "Perubahan: Merah → Kuning"], "orange", True),
-            ("PAN", ["pH 3–4", "Perubahan: Violet → Kuning"], "purple", False),
         ],
         "Al³⁺": [
-            ("PAN + titrasi balik ZnSO₄", ["pH 5–6 — buffer heksamin",
-             "Perubahan (balik): Kuning → Merah", "Al³⁺ bereaksi lambat → titrasi balik"], "purple", True),
             ("Xylenol Orange + titrasi balik", ["pH 5",
-             "Perubahan: Kuning → Merah-ungu"], "orange", False),
+             "Perubahan: Kuning → Merah-ungu"], "orange", True),
         ],
         "Ni²⁺": [
             ("Murexide", ["pH 8–9 — buffer amonia",
              "Perubahan: Kuning → Ungu"], "purple", True),
-            ("PAN", ["pH 4–5", "Perubahan: Violet → Kuning"], "purple", False),
         ],
         "Co²⁺": [
             ("Murexide", ["pH 8–9 — buffer amonia",
              "Perubahan: Kuning → Ungu"], "purple", True),
-            ("PAN", ["pH 4–5", "Perubahan: Violet → Kuning"], "purple", False),
         ],
     }
 
@@ -347,8 +336,8 @@ elif pilih_jenis == "🟣 Titrasi Kompleksometri":
 # ═══════════════════════════════════════════
 # BRANCH 4 — TITRASI PENGENDAPAN
 # ═══════════════════════════════════════════
-elif pilih_jenis == "🟢 Titrasi Pengendapan":
-    st.subheader("🟢 Titrasi Pengendapan (Argentometri)")
+elif pilih_jenis == "🟢 Titrasi Argentometri":
+    st.subheader("🟢 Titrasi Argentometri")
     step(2, "Pilih Metode Argentometri")
     metode = st.radio(
         "Metode",
@@ -363,44 +352,41 @@ elif pilih_jenis == "🟢 Titrasi Pengendapan":
         card(
             "Kalium Kromat — K₂CrO₄",
             [
-                "Konsentrasi: 0.5% – 5% w/v",
-                "Kondisi: pH 6.5 – 10.5 (netral – sedikit basa)",
+                "Kondisi: pH 6.5 – 10,0 (netral – sedikit basa)",
                 "Titik akhir: endapan <b>merah bata (Ag₂CrO₄)</b> permanen",
-                "Analit: Cl⁻, Br⁻",
+                "Analit: halida,CN⁻, dan CNS",
             ],
             "yellow",
             True,
         )
         warn(
-            "Tidak dapat digunakan dalam suasana asam (pH < 6.5) — CrO₄²⁻ berubah menjadi Cr₂O₇²⁻. "
-            "Juga tidak cocok untuk I⁻ dan SCN⁻ karena Ksp AgI dan AgSCN lebih kecil dari Ag₂CrO₄."
+            "Tidak dapat digunakan dalam suasana asam — CrO₄²⁻ berubah menjadi Cr₂O₇²⁻.",
+            "Tidak dapat digunakan dalam suasana basa — akan terbentuk endapan AgOH."
         )
 
     elif metode == "Argentometri (Volhard)":
         card(
             "Besi(III) Amonium Sulfat — NH₄Fe(SO₄)₂",
             [
-                "Kondisi: suasana asam (HNO₃ encer, pH < 3)",
-                "Titran: KSCN atau NH₄SCN (bukan AgNO₃ langsung untuk analit halida)",
-                "Titik akhir: larutan berwarna <b>merah darah (FeSCN²⁺)</b> permanen",
-                "Analit: Ag⁺, Cl⁻, Br⁻, I⁻, SCN⁻ (titrasi balik)",
+                "Kondisi: suasana asam (HNO₃ 4N)",
+                "Titik akhir: larutan berwarna <b>merah (FeSCN²⁺)</b> permanen",
+                "Analit: Ag⁺, Cl⁻, Br⁻, I⁻",
             ],
             "red",
             True,
         )
         warn(
             "Untuk penetapan Cl⁻ secara tidak langsung, endapan AgCl harus disaring atau ditambahkan "
-            "nitrobenzena agar SCN⁻ tidak bereaksi dengan AgCl. Jangan lakukan dalam suasana basa."
+            "Pelarut organik ditambahkan agar SCN⁻ tidak bereaksi dengan AgCl."
         )
 
     else:  # Fajans
         card(
             "Diklorofluoresein",
             [
-                "Kondisi: pH 4 – 10 (rentang lebar)",
-                "Titik akhir: endapan berubah dari putih → <b>merah muda</b>",
+                "Kondisi: pH 4 – 10 ",
+                "Titik akhir: endapan putih → <b>merah muda</b>",
                 "Analit: Cl⁻, Br⁻, I⁻",
-                "Lebih sensitif dari fluoresein",
             ],
             "green",
             True,
@@ -408,16 +394,15 @@ elif pilih_jenis == "🟢 Titrasi Pengendapan":
         card(
             "Fluoresein",
             [
-                "Kondisi: pH 7 – 10 (netral – sedikit basa)",
-                "Titik akhir: endapan berubah → <b>merah muda/kehijauan</b>",
-                "Analit: Cl⁻ (paling umum)",
+                "Kondisi: pH 7 – 8,5 (netral – sedikit basa)",
+                "Titik akhir: endapan putih → <b>merah muda</b>",
+                "Analit: Cl⁻",
             ],
             "green",
         )
         warn(
             "Indikator adsorpsi (fluoresein/diklorofluoresein) bekerja dengan cara teradsorpsi pada "
-            "permukaan endapan AgX. Hindari paparan cahaya matahari langsung yang intens selama titrasi "
-            "karena dapat memfotodekomposisi indikator."
+            "permukaan endapan AgX."
         )
 
     done()
@@ -432,7 +417,7 @@ else:
         **Panduan singkat:**
         | Jenis | Titran | Contoh Analit |
         |---|---|---|
-        | Asam-Basa | NaOH / HCl | Asam asetat, Na₂CO₃ |
+        | Asam-Basa | NaOH / HCl | CH₃COOH, Na₂CO₃ |
         | Redoks | KMnO₄ / Na₂S₂O₃ | Fe²⁺, Cl⁻, I₂ |
         | Kompleksometri | EDTA | Ca²⁺, Mg²⁺, Zn²⁺ |
         | Pengendapan | AgNO₃ | Cl⁻, Br⁻, I⁻ |
