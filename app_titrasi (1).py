@@ -176,54 +176,31 @@ if pilih_jenis == "🔴 Titrasi Asam-Basa":
     st.subheader("🔴 Titrasi Asam-Basa")
     col1, col2 = st.columns(2)
 
-    with col1:
-        step(2, "Jenis Titran Asam-Basa")
-        titran = st.radio(
-            "Titran",
-            [
-                "Asam Kuat – Basa Kuat",
-                "Asam Kuat – Basa Lemah",
-                "Asam Lemah – Basa Kuat",
-                "Asam Lemah – Basa Lemah",
-            ],
-            label_visibility="collapsed",
-        )
-
-   
-
-    st.divider()
-    st.subheader("💡 Rekomendasi Indikator")
-
     if titran == "Asam Kuat – Basa Kuat":
         # pH ≈ 7, kurva curam → banyak pilihan
         card("Bromtimol Biru", ["Rentang pH: 6.0 – 7.6",
-             "Perubahan: Kuning → Biru", "Cocok untuk titik ekuivalen netral"], "teal", True)
+             "Perubahan: Kuning → Biru", "Warna hijau akan muncul sebagai warna antara"], "teal", True)
         card("Fenolftalein", ["Rentang pH: 8.2 – 10.0",
              "Perubahan: Tidak berwarna → Pink"], "red")
-        card("Metil Oranye", ["Rentang pH: 3.1 – 4.4",
-             "Perubahan: Merah → Oranye-Kuning"], "orange")
+        
 
-    elif titran == "Asam Kuat – Basa Lemah":
-        card("Metil Oranye", ["Rentang pH: 3.1 – 4.4",
-             "Perubahan: Merah → Oranye-Kuning",
-             "pH ekuivalen < 7 → ideal"], "orange", True)
-        card("Metil Merah", ["Rentang pH: 4.4 – 6.2",
-             "Perubahan: Merah → Kuning"], "red")
-        warn("Jangan gunakan fenolftalein — titik ekuivalen bersifat asam.")
-
+    elif titran == "Basa Lemah – Asam Kuat":
+        card("Metil jingga", [ "Rentang pH: 3.1 – 4.4",
+             "Perubahan: Kuning → Merah", "Sangat sesuai untuk titik ekuivalen yang bersifat asam"], "orange", True)
+        card("Metil Merah", ["Rentang pH: 4.2 – 6.2",
+         "Perubahan: Kuning → Merah", "Warna jingga akan mucul sebagai warna antara"], "red")
+        warn("Fenolftalein tidak direkomendasikan karena perubahan warnanya terjadi pada daerah basa.")
+    
     elif titran == "Asam Lemah – Basa Kuat":
         card("Fenolftalein", ["Rentang pH: 8.2 – 10.0",
              "Perubahan: Tidak berwarna → Pink",
              "pH ekuivalen > 7 → ideal"], "red", True)
-        card("Timolftalein", ["Rentang pH: 9.3 – 10.5",
-             "Perubahan: Tidak berwarna → Biru"], "purple")
-        warn("Jangan gunakan metil oranye — perubahan warna terjadi jauh sebelum titik ekuivalen.")
+        warn("Jangan gunakan metil oranye, metil merah dan BTB — Pengamatan pada titik akhir akan kurang jelas karena trayek pH tidak sesuai dengan titik ekuivalen.")
 
     else:  # Asam Lemah – Basa Lemah
         warn(
             "Titrasi asam lemah – basa lemah <b>tidak direkomendasikan</b> secara analitik "
-            "karena tidak memiliki titik ekuivalen yang tajam. Jika terpaksa, gunakan "
-            "indikator universal dan berhati-hati dalam membaca perubahan warna."
+            "karena tidak memiliki titik ekuivalen yang tajam. sehingga titik akhir titrasi sangat sulit dideteksi menggunakan indikator warna standar."
         )
 
     done()
