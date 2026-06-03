@@ -286,7 +286,7 @@ elif pilih_jenis == "🟣 Titrasi Kompleksometri":
 
         ],
         "Cu²⁺": [
-            ("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True,
+            ("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True),
         ],
         "Fe²⁺ / Fe³⁺": [
             ("Asam salisilat", ["pH 1–2 (untuk Fe³⁺ — suasana sangat asam)",
