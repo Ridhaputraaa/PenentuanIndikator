@@ -123,7 +123,7 @@ st.markdown(
 st.markdown(
     """
     <div class="banner">
-        <h1>👩🏻‍🔬 Sistem Rekomendasi Titrasi</h1>
+        <h1>👩🏻‍🔬 Sistem Rekomendasi Indikator Titrasi</h1>
         <p>Pilih jenis titrasi → ikuti langkah → dapatkan rekomendasi indikator</p>
     </div>
     """,
