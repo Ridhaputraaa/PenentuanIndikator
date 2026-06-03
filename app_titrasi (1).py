@@ -433,7 +433,7 @@ else:
         | Jenis | Titran | Contoh Analit |
         |---|---|---|
         | Asam-Basa | NaOH / HCl | Asam asetat, Na₂CO₃ |
-        | Redoks | KMnO₄ / Na₂S₂O₃ | Fe²⁺, H₂O₂, I₂ |
+        | Redoks | KMnO₄ / Na₂S₂O₃ | Fe²⁺, Cl⁻, I₂ |
         | Kompleksometri | EDTA | Ca²⁺, Mg²⁺, Zn²⁺ |
         | Pengendapan | AgNO₃ | Cl⁻, Br⁻, I⁻ |
         """
