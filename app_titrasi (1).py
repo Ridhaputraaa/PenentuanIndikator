@@ -355,14 +355,10 @@ elif pilih_jenis == "🟢 Titrasi Argentometri":
                 "Kondisi: pH 6.5 – 10,0 (netral – sedikit basa)",
                 "Titik akhir: endapan <b>merah bata (Ag₂CrO₄)</b> permanen",
                 "Analit: halida,CN⁻, dan CNS",
-            ],
-            "yellow",
-            True,
-        )
+            ],"yellow",True,)
         warn(
             "Tidak dapat digunakan dalam suasana asam — CrO₄²⁻ berubah menjadi Cr₂O₇²⁻.",
-            "Tidak dapat digunakan dalam suasana basa — akan terbentuk endapan AgOH."
-        )
+            "Tidak dapat digunakan dalam suasana basa — akan terbentuk endapan AgOH.")
 
     elif metode == "Argentometri (Volhard)":
         card(
