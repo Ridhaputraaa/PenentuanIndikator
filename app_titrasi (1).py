@@ -189,13 +189,7 @@ if pilih_jenis == "🔴 Titrasi Asam-Basa":
             label_visibility="collapsed",
         )
 
-    with col2:
-        step(3, "Perkiraan pH Titik Ekuivalen")
-        ph = st.radio(
-            "pH",
-            ["< 7  (Asam)", "= 7  (Netral)", "> 7  (Basa)"],
-            label_visibility="collapsed",
-        )
+   
 
     st.divider()
     st.subheader("💡 Rekomendasi Indikator")
