@@ -29,34 +29,53 @@ st.markdown(
         .banner h1 { color: #e0e0e0; font-size: 2em; margin: 0 0 6px 0; }
         .banner p  { color: #a0c4ff; font-size: 1em; margin: 0; }
 
-        /* ── cards ── */
-        .card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin: 10px 0;
-            border-left: 6px solid #2196F3;
-            box-shadow: 0 2px 8px rgba(0,0,0,.08);
-        }
-        .card.red    { border-color: #e53935; }
-        .card.green  { border-color: #43a047; }
-        .card.orange { border-color: #fb8c00; }
-        .card.purple { border-color: #8e24aa; }
-        .card.yellow { border-color: #f9a825; }
-        .card.teal   { border-color: #00897b; }
+      # ── cards ──
+.card {
+    background: #ffffff;
+    color: #000000 !important;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 10px 0;
+    border-left: 6px solid #2196F3;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
 
-        .card h4 { margin: 0 0 6px 0; font-size: 1.05em; }
-        .card p  { margin: 2px 0; font-size: .93em; color: #444; }
-        .badge {
-            display: inline-block;
-            background: #fff8e1;
-            color: #f57f17;
-            border: 1px solid #ffe082;
-            border-radius: 20px;
-            padding: 2px 10px;
-            font-size: .8em;
-            margin-top: 6px;
-        }
+.card.red    { border-color: #e53935; }
+.card.green  { border-color: #43a047; }
+.card.orange { border-color: #fb8c00; }
+.card.purple { border-color: #8e24aa; }
+.card.yellow { border-color: #f9a825; }
+.card.teal   { border-color: #00897b; }
+
+.card,
+.card *,
+.card h4,
+.card p,
+.card div,
+.card span {
+    color: #000000 !important;
+}
+
+.card h4 {
+    margin: 0 0 6px 0;
+    font-size: 1.05em;
+}
+
+.card p {
+    margin: 2px 0;
+    font-size: .93em;
+}
+
+.badge {
+    display: inline-block;
+    background: #fff8e1;
+    color: #000000 !important;
+    border: 1px solid #ffe082;
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: .8em;
+    margin-top: 6px;
+}
 
         /* ── warning box ── */
         .warn {
@@ -142,9 +161,9 @@ step(1, "Pilih Jenis Titrasi")
 JENIS = [
     "── Pilih ──",
     "🔴 Titrasi Asam-Basa",
-    "⚡ Titrasi Redoks",
-    "🔗 Titrasi Kompleksometri",
-    "🌧️ Titrasi Pengendapan",
+    "🟡 Titrasi Redoks",
+    "🟣 Titrasi Kompleksometri",
+    "🟢 Titrasi Argentometri",
 ]
 pilih_jenis = st.selectbox("Jenis Titrasi", JENIS, label_visibility="collapsed")
 
@@ -218,8 +237,8 @@ if pilih_jenis == "🔴 Titrasi Asam-Basa":
 # ═══════════════════════════════════════════
 # BRANCH 2 — TITRASI REDOKS
 # ═══════════════════════════════════════════
-elif pilih_jenis == "⚡ Titrasi Redoks":
-    st.subheader("⚡ Titrasi Redoks")
+elif pilih_jenis == "🟡 Titrasi Redoks":
+    st.subheader("🟡 Titrasi Redoks")
     step(2, "Pilih Metode Titrasi Redoks")
     metode = st.radio(
         "Metode",
@@ -277,8 +296,8 @@ elif pilih_jenis == "⚡ Titrasi Redoks":
 # ═══════════════════════════════════════════
 # BRANCH 3 — TITRASI KOMPLEKSOMETRI
 # ═══════════════════════════════════════════
-elif pilih_jenis == "🔗 Titrasi Kompleksometri":
-    st.subheader("🔗 Titrasi Kompleksometri (EDTA)")
+elif pilih_jenis == "🟣 Titrasi Kompleksometri":
+    st.subheader("🟣 Titrasi Kompleksometri (EDTA)")
     step(2, "Pilih Ion Logam yang Dititrasi")
 
     ION_DATA = {
@@ -353,8 +372,8 @@ elif pilih_jenis == "🔗 Titrasi Kompleksometri":
 # ═══════════════════════════════════════════
 # BRANCH 4 — TITRASI PENGENDAPAN
 # ═══════════════════════════════════════════
-elif pilih_jenis == "🌧️ Titrasi Pengendapan":
-    st.subheader("🌧️ Titrasi Pengendapan (Argentometri)")
+elif pilih_jenis == "🟢 Titrasi Pengendapan":
+    st.subheader("🟢 Titrasi Pengendapan (Argentometri)")
     step(2, "Pilih Metode Argentometri")
     metode = st.radio(
         "Metode",
