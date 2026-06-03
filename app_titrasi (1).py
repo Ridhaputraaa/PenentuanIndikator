@@ -357,8 +357,8 @@ elif pilih_jenis == "🟢 Titrasi Argentometri":
                 "Analit: halida,CN⁻, dan CNS",
             ],"yellow",True,)
         warn(
-            "Tidak dapat digunakan dalam suasana asam — CrO₄²⁻ berubah menjadi Cr₂O₇²⁻.",
-            "Tidak dapat digunakan dalam suasana basa — akan terbentuk endapan AgOH.")
+            "Tidak dapat digunakan dalam suasana asam karena CrO₄²⁻ berubah menjadi Cr₂O₇²⁻.",
+            "Tidak dapat digunakan dalam suasana basa karena akan terbentuk endapan AgOH.")
 
     elif metode == "Argentometri (Volhard)":
         card(
