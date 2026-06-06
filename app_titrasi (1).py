@@ -194,7 +194,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                N = (massa) / (63.0 * volume)
+                N = (massa) / (4 * 63.0 * volume)
                 st.success(f"Normalitas NaOH = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
@@ -204,7 +204,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume HCl (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                N = (massa) / (190.7 * volume)
+                N = (massa) / (4 *190.7 * volume)
                 st.success(f"Normalitas HCl = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
@@ -215,7 +215,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
                 BE = 63.0
-                N = (massa) / (BE * volume)
+                N = (massa) / (4 * BE * volume)
                 st.success(f"Normalitas KMnO₄ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
@@ -226,7 +226,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
                 BE = 49.04  # K2Cr2O7
-                N = (massa ) / (BE * volume)
+                N = (massa ) / (4 * BE * volume)
                 st.success(f"Normalitas Na₂S₂O₃ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
@@ -236,7 +236,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                M = (massa) / (volume * 100)
+                M = (massa) / (4 * volume * 100)
                 st.success(f"Molaritas EDTA = {M:.4f} M")
             else:
                 st.error("Volume tidak boleh 0.")
