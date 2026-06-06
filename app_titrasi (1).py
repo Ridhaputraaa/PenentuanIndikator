@@ -225,7 +225,9 @@ if fitur == "Menghitung Standarisasi Larutan":
             M = (massa / 100.09) / (volume / 1000)
             st.success(f"Molaritas EDTA = {M:.4f} M")
 
-else:
+if fitur == "Menentukan Indikator Titrasi":
+
+    step(1, "Pilih Jenis Titrasi")
 
 
 # ─────────────────────────────────────────────
