@@ -228,7 +228,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
                 BE = 0.04904  # mg/mgrek (BM=294.2, valensi=6 → BE=49.04 g/ek = 0.04904 mg/mgrek)
-                N = massa / ((100 / 25) * volume * BE)
+                N = massa / (volume * BE)
                 st.success(f"Normalitas Na₂S₂O₃ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
