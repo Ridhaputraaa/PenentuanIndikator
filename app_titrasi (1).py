@@ -238,7 +238,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BM = 100,09 # mg/mmol
+                BM = 100.09 # mg/mmol
                 M = massa / ((100 / 25) * volume * BM)
                 st.success(f"Molaritas EDTA = {M:.4f} M")
             else:
