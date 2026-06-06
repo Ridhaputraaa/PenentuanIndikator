@@ -153,6 +153,81 @@ def step(n, label):
     st.markdown(f'<div class="step-badge">Langkah {n}</div>', unsafe_allow_html=True)
     st.markdown(f"**{label}**")
 
+
+# =========================
+# MENU UTAMA
+# =========================
+st.markdown("### 🎯 Pilih Tujuan")
+
+fitur = st.radio(
+    "",
+    [
+        "Menentukan Indikator Titrasi",
+        "Menghitung Standarisasi Larutan"
+    ]
+)
+
+st.divider()
+
+if fitur == "Menghitung Standarisasi Larutan":
+
+    st.subheader("🧪 Perhitungan Standarisasi Larutan")
+
+    metode = st.selectbox(
+        "Pilih Metode Standarisasi",
+        [
+            "NaOH dengan Asam Oksalat",
+            "HCl dengan Boraks",
+            "KMnO4 dengan Kalium Dikromat",
+            "Na2S2O3 dengan KIO3",
+            "EDTA dengan CaCO3"
+        ]
+    )
+
+    if metode == "NaOH dengan Asam Oksalat":
+        massa = st.number_input("Massa Asam Oksalat (g)", min_value=0.0, format="%.4f")
+        volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
+
+        if st.button("Hitung Konsentrasi"):
+            N = (massa * 1000) / (63.0 * volume)
+            st.success(f"Normalitas NaOH = {N:.4f} N")
+
+    elif metode == "HCl dengan Boraks":
+        massa = st.number_input("Massa Boraks (g)", min_value=0.0, format="%.4f")
+        volume = st.number_input("Volume HCl (mL)", min_value=0.0, format="%.2f")
+
+        if st.button("Hitung Konsentrasi"):
+            N = (massa * 1000) / (190.7 * volume)
+            st.success(f"Normalitas HCl = {N:.4f} N")
+
+    elif metode == "KMnO4 dengan Kalium Dikromat":
+        massa = st.number_input("Massa K2Cr2O7 (g)", min_value=0.0, format="%.4f")
+        volume = st.number_input("Volume KMnO4 (mL)", min_value=0.0, format="%.2f")
+
+        if st.button("Hitung Konsentrasi"):
+            N = (massa * 1000) / (49.04 * volume)
+            st.success(f"Normalitas KMnO4 = {N:.4f} N")
+
+    elif metode == "Na2S2O3 dengan KIO3":
+        n_kio3 = st.number_input("Normalitas KIO3", min_value=0.0, format="%.4f")
+        v_kio3 = st.number_input("Volume KIO3 (mL)", min_value=0.0, format="%.2f")
+        v_tio = st.number_input("Volume Na2S2O3 (mL)", min_value=0.0, format="%.2f")
+
+        if st.button("Hitung Konsentrasi"):
+            N = (n_kio3 * v_kio3) / v_tio
+            st.success(f"Normalitas Na2S2O3 = {N:.4f} N")
+
+    elif metode == "EDTA dengan CaCO3":
+        massa = st.number_input("Massa CaCO3 (g)", min_value=0.0, format="%.4f")
+        volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
+
+        if st.button("Hitung Konsentrasi"):
+            M = (massa / 100.09) / (volume / 1000)
+            st.success(f"Molaritas EDTA = {M:.4f} M")
+
+else:
+
+
 # ─────────────────────────────────────────────
 # STEP 1 – PILIH JENIS TITRASI
 # ─────────────────────────────────────────────
