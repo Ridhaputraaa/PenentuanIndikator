@@ -194,7 +194,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                N = (massa) / (4*63.0*volume)
+                N = (massa)/(4*63.0*volume)
                 st.success(f"Normalitas NaOH = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
