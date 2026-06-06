@@ -190,53 +190,56 @@ if fitur == "Menghitung Standarisasi Larutan":
     )
 
     if metode == "NaOH dengan Asam Oksalat":
-        massa = st.number_input("Massa Asam Oksalat (g)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                N = (massa)/(4*63.0*volume)
+                BE = 63.0
+                N = massa / ((100 / 25) * volume * BE)
                 st.success(f"Normalitas NaOH = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "HCl dengan Boraks":
-        massa = st.number_input("Massa Boraks (g)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa Boraks (mg)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume HCl (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                N = (massa) / (4 *190.7 * volume)
+                BE = 190.7
+                N = massa / ((100 / 25) * volume * BE)
                 st.success(f"Normalitas HCl = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "KMnO4 dengan Asam Oksalat":
-        massa = st.number_input("Massa Asam Oksalat (g)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume KMnO4 (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
                 BE = 63.0
-                N = (massa) / (4 * BE * volume)
+                N = massa / ((100 / 25) * volume * BE)
                 st.success(f"Normalitas KMnO₄ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "Na2S2O3 dengan Kalium Dikromat":
-        massa = st.number_input("Massa K2Cr2O7 (g)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa K2Cr2O7 (mg)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume Na2S2O3 (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
                 BE = 49.04  # K2Cr2O7
-                N = (massa ) / (4 * BE * volume)
+                N = massa / ((100 / 25) * volume * BE)
                 st.success(f"Normalitas Na₂S₂O₃ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "EDTA dengan CaCO3":
-        massa = st.number_input("Massa CaCO3 (g)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa CaCO3 (mg)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                M = (massa) / (4 * volume * 100)
+                BE = 100.09  # BM CaCO3, valensi 2 → BE = 100.09/2 = 50.045, tapi untuk molaritas pakai BM
+                M = massa / ((100 / 25) * volume * BE)
                 st.success(f"Molaritas EDTA = {M:.4f} M")
             else:
                 st.error("Volume tidak boleh 0.")
