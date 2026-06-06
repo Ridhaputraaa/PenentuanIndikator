@@ -200,22 +200,25 @@ if fitur == "Menghitung Standarisasi Larutan":
             N = (massa * 1000) / (190.7 * volume)
             st.success(f"Normalitas HCl = {N:.4f} N")
 
-    elif metode == "KMnO4 dengan Kalium Dikromat":
-        massa = st.number_input("Massa K2Cr2O7 (g)", min_value=0.0, format="%.4f")
+    elif metode == "KMnO4 dengan Asam Oksalat":
+        
+        massa = st.number_input("Massa Asam Oksalat (g)", min_value=0.0,format="%.4f")
         volume = st.number_input("Volume KMnO4 (mL)", min_value=0.0, format="%.2f")
 
-        if st.button("Hitung Konsentrasi"):
-            N = (massa * 1000) / (49.04 * volume)
-            st.success(f"Normalitas KMnO4 = {N:.4f} N")
+    if st.button("Hitung Konsentrasi"):
+        BE = 63.0
+        N = (massa * 1000) / (BE * volume)
+        st.success(f"Normalitas KMnO₄ = {N:.4f} N")
 
-    elif metode == "Na2S2O3 dengan KIO3":
-        n_kio3 = st.number_input("Normalitas KIO3", min_value=0.0, format="%.4f")
-        v_kio3 = st.number_input("Volume KIO3 (mL)", min_value=0.0, format="%.2f")
-        v_tio = st.number_input("Volume Na2S2O3 (mL)", min_value=0.0, format="%.2f")
+    elif metode == "Na2S2O3 dengan Kalium Dikromat":
+        massa = st.number_input("Massa K2Cr2O7 (g)", min_value=0.0, format="%.4f")
+        volume = st.number_input( "Volume Na2S2O3 (mL)", min_value=0.0, format="%.2f")
 
-        if st.button("Hitung Konsentrasi"):
-            N = (n_kio3 * v_kio3) / v_tio
-            st.success(f"Normalitas Na2S2O3 = {N:.4f} N")
+    if st.button("Hitung Konsentrasi"):
+
+        BE = 49.04  # K2Cr2O7
+        N = (massa * 1000) / (BE * volume)
+        st.success(f"Normalitas Na₂S₂O₃ = {N:.4f} N")
 
     elif metode == "EDTA dengan CaCO3":
         massa = st.number_input("Massa CaCO3 (g)", min_value=0.0, format="%.4f")
