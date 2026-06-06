@@ -194,7 +194,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 63.0
+                BE = 0.063  # mg/mgrek (BM=126, valensi=2 → BE=63 g/ek = 0.063 mg/mgrek)
                 N = massa / ((100 / 25) * volume * BE)
                 st.success(f"Normalitas NaOH = {N:.4f} N")
             else:
@@ -205,7 +205,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume HCl (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 190.7
+                BE = 0.1907  # mg/mgrek (BM=381.4, valensi=2 → BE=190.7 g/ek = 0.1907 mg/mgrek)
                 N = massa / ((100 / 25) * volume * BE)
                 st.success(f"Normalitas HCl = {N:.4f} N")
             else:
@@ -216,7 +216,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume KMnO4 (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 63.0
+                BE = 0.063  # mg/mgrek (BM=126, valensi=2 → BE=63 g/ek = 0.063 mg/mgrek)
                 N = massa / ((100 / 25) * volume * BE)
                 st.success(f"Normalitas KMnO₄ = {N:.4f} N")
             else:
@@ -227,7 +227,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume Na2S2O3 (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 49.04  # K2Cr2O7
+                BE = 0.04904  # mg/mgrek (BM=294.2, valensi=6 → BE=49.04 g/ek = 0.04904 mg/mgrek)
                 N = massa / ((100 / 25) * volume * BE)
                 st.success(f"Normalitas Na₂S₂O₃ = {N:.4f} N")
             else:
@@ -238,7 +238,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 100.09  # BM CaCO3, valensi 2 → BE = 100.09/2 = 50.045, tapi untuk molaritas pakai BM
+                BE = 0.05005  # mg/mgrek (BM=100.09, valensi=2 → BE=50.05 g/ek = 0.05005 mg/mgrek)
                 M = massa / ((100 / 25) * volume * BE)
                 st.success(f"Molaritas EDTA = {M:.4f} M")
             else:
