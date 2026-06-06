@@ -176,11 +176,11 @@ if fitur == "Menghitung Standarisasi Larutan":
     metode = st.selectbox(
         "Pilih Metode Standarisasi",
         [
-            "NaOH dengan Asam Oksalat",
-            "HCl dengan Boraks",
-            "KMnO4 dengan Kalium Dikromat",
-            "Na2S2O3 dengan KIO3",
-            "EDTA dengan CaCO3"
+            st.button("Hitung Normalitas NaOH")
+            st.button("Hitung Normalitas HCl")
+            st.button("Hitung Normalitas KMnO4")
+            st.button("Hitung Normalitas Na2S2O3")
+            st.button("Hitung Molaritas EDTA")
         ]
     )
 
