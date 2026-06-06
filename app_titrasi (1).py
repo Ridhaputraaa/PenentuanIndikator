@@ -190,7 +190,7 @@ if fitur == "Menghitung Standarisasi Larutan":
     )
 
     if metode == "NaOH dengan Asam Oksalat":
-        massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa Asam Oksalat (g)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
@@ -201,7 +201,7 @@ if fitur == "Menghitung Standarisasi Larutan":
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "HCl dengan Boraks":
-        massa = st.number_input("Massa Boraks (mg)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa Boraks (g)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume HCl (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
@@ -212,7 +212,7 @@ if fitur == "Menghitung Standarisasi Larutan":
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "KMnO4 dengan Asam Oksalat":
-        massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa Asam Oksalat (g)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume KMnO4 (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
@@ -223,7 +223,7 @@ if fitur == "Menghitung Standarisasi Larutan":
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "Na2S2O3 dengan Kalium Dikromat":
-        massa = st.number_input("Massa K2Cr2O7 (mg)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa K2Cr2O7 (g)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume Na2S2O3 (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
@@ -234,7 +234,7 @@ if fitur == "Menghitung Standarisasi Larutan":
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "EDTA dengan CaCO3":
-        massa = st.number_input("Massa CaCO3 (mg)", min_value=0.0, format="%.4f")
+        massa = st.number_input("Massa CaCO3 (g)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
