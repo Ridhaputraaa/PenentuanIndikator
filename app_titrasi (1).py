@@ -224,7 +224,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         massa = st.number_input("Massa CaCO3 (g)", min_value=0.0, format="%.4f")
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
 
-        if st.button("Hitung Konsentrasi"):
+    if st.button("Hitung Konsentrasi"):
             M = (massa / 100.09) / (volume / 1000)
             st.success(f"Molaritas EDTA = {M:.4f} M")
 
