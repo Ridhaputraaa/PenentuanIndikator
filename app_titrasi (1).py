@@ -4,7 +4,7 @@ import streamlit as st
 # PAGE CONFIG
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="Sistem Rekomendasi Titrasi",
+    page_title="Sistem Rekomendasi Indikator Titrasi yang Dilengkapi dengan Perhitungan Standardisasi Larutan",
     page_icon="⚛️",
     layout="centered",
 )
