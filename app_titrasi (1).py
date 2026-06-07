@@ -4,35 +4,178 @@ import streamlit as st
 # PAGE CONFIG
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="Sistem Rekomendasi Indikator Titrasi",
-    page_icon="🥉",
+    page_title="Sistem Rekomendasi Titrasi",
+    page_icon="⚛️",
     layout="centered",
 )
 
+page_bg_img = """
+<style>
+
+/* Background Utama Aplikasi */
+.stApp {
+    background-image: url("https://pixabay.com/id/images/download/chenspec-science-6575273_1920.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Memaksa semua teks di luar box berwarna hitam tebal */
+h1, h2, h3, h4, h5, h6,
+p, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   🎯 DROPDOWN & INPUT BOX - GRADASI BIRU & TEKS PUTIH
+   ───────────────────────────────────────────────────────────── */
+
+/* ==================== 1. SELECTBOX (DROPDOWN) ==================== */
+/* Kotak Utama Selectbox Sebelum Diklik (Gradasi Biru) */
+div[data-baseweb="select"] > div {
+    background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
+    border: 2px solid #328cc1 !important;
+    border-radius: 8px !important;
+}
+
+/* Teks di dalam kotak utama sebelum diklik (Warna Putih) */
+div[data-baseweb="select"] span, 
+div[data-baseweb="select"] div {
+    color: white !important;
+    font-weight: bold !important;
+}
+
+/* Daftar pilihan saat diklik (Menu Popover) */
+div[data-baseweb="popover"] ul,
+div[role="listbox"],
+[data-baseweb="menu"],
+[data-baseweb="menu"] ul {
+    background: linear-gradient(135deg, #0b3c5d 0%, #1d5f8a 100%) !important;
+    background-color: #0b3c5d !important;
+    border: 2px solid #328cc1 !important;
+    border-radius: 8px !important;
+}
+
+/* Baris Opsi Pilihan di Dalam Dropdown (Tampilan Awal & Diklik) */
+div[role="option"],
+div[role="option"] span,
+div[role="option"] div,
+li[role="option"],
+li[role="option"] span {
+    color: white !important;
+    background-color: transparent !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+}
+
+/* Efek ketika opsi dropdown disorot/hover (Hover) */
+div[role="option"]:hover,
+div[role="option"]:active,
+li[role="option"]:hover,
+li[role="option"]:focus,
+div[data-baseweb="popover"] ul li:hover {
+    background-color: #328cc1 !important;
+    background: #328cc1 !important;
+    color: white !important;
+}
+
+
+/* ==================== 2. NUMBER INPUT BOX ==================== */
+/* Kotak Utama Input Nilai (Gradasi Biru) */
+div[data-baseweb="input"] {
+    background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
+    border: 2px solid #328cc1 !important;
+    border-radius: 8px !important;
+}
+
+/* Mengubah background bagian dalam input agar transparan mengikuti gradasi */
+div[data-baseweb="input"] input {
+    background-color: transparent !important;
+    color: white !important; /* Teks angka saat dimasukkan berwarna putih */
+    font-weight: bold !important;
+}
+
+/* Memastikan teks nilai berwarna putih saat posisi fokus/diklik */
+div[data-baseweb="input"] input:focus {
+    color: white !important;
+}
+
+/* Memaksa tombol plus/minus (+ dan -) bawaan Streamlit berwarna putih */
+div[data-baseweb="input"] button {
+    color: white !important;
+    background-color: transparent !important;
+}
+
+
+/* ==================== 3. KONTEN LAINNYA ==================== */
+/* Lapisan putih transparan di tengah agar teks konten mudah dibaca */
+.main .block-container {
+    background: rgba(255,255,255,0.45);
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+/* Tabel markdown */
+table, th, td {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* Kotak info bawaan Streamlit */
+.stInfo {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* GAYA KHUSUS UNTUK KOTAK PUTIH TABEL PANDUAN DAN FOOTER */
+.custom-white-box {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
+
 # ─────────────────────────────────────────────
-# CUSTOM CSS
+# CUSTOM CSS UNTUK BANNER DAN CARD
 # ─────────────────────────────────────────────
 st.markdown(
     """
     <style>
-        /* ── global ── */
         body { font-family: 'Segoe UI', sans-serif; }
+        
+        .banner h1 {
+            color: #0b3c5d !important; 
+            font-weight: bold !important;
+            font-size: 2em;
+        }
 
-        /* ── header banner ── */
+        .banner p {
+            color: #328cc1 !important; 
+            font-weight: bold !important;
+        }
+
         .banner {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
             border-radius: 14px;
             padding: 28px 20px;
             text-align: center;
             margin-bottom: 28px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
-        .banner h1 { color: #e0e0e0; font-size: 2em; margin: 0 0 6px 0; }
-        .banner p  { color: #a0c4ff; font-size: 1em; margin: 0; }
 
-        /* ── cards ── */
+        /* Kartu Rekomendasi Indikator */
         .card {
-            background: #ffffff;
-            color: #000000 !important;
+            background: #ffffff !important;
             border-radius: 12px;
             padding: 18px 20px;
             margin: 10px 0;
@@ -47,24 +190,14 @@ st.markdown(
         .card.yellow { border-color: #f9a825; }
         .card.teal   { border-color: #00897b; }
 
-        .card,
-        .card *,
-        .card h4,
-        .card p,
-        .card div,
-        .card span {
+        /* Memaksa tulisan di dalam kartu SELALU HITAM */
+        .card, .card h4, .card p, .card span, .card li {
             color: #000000 !important;
+            font-weight: bold !important;
         }
 
-        .card h4 {
-            margin: 0 0 6px 0;
-            font-size: 1.05em;
-        }
-
-        .card p {
-            margin: 2px 0;
-            font-size: .93em;
-        }
+        .card h4 { margin: 0 0 6px 0; font-size: 1.05em; }
+        .card p { margin: 2px 0; font-size: .93em; }
 
         .badge {
             display: inline-block;
@@ -77,7 +210,6 @@ st.markdown(
             margin-top: 6px;
         }
 
-        /* ── warning box ── */
         .warn {
             background: #fff3e0;
             border-left: 5px solid #FF9800;
@@ -85,15 +217,15 @@ st.markdown(
             padding: 14px 16px;
             margin: 10px 0;
             font-size: .92em;
-            color: #5d4037;
+            color: #5d4037 !important;
         }
-        .warn b { color: #e65100; }
+        .warn b { color: #e65100 !important; }
+        .warn * { color: #5d4037 !important; }
 
-        /* ── step badge ── */
         .step-badge {
             display: inline-block;
             background: #e8eaf6;
-            color: #3949ab;
+            color: #3949ab !important;
             border-radius: 20px;
             padding: 3px 14px;
             font-size: .82em;
@@ -101,13 +233,12 @@ st.markdown(
             margin-bottom: 12px;
         }
 
-        /* ── done banner ── */
         .done {
             background: linear-gradient(90deg,#e8f5e9,#f1f8e9);
             border: 1.5px solid #a5d6a7;
             border-radius: 10px;
             padding: 14px 18px;
-            color: #2e7d32;
+            color: #2e7d32 !important;
             font-weight: 600;
             margin-top: 14px;
             text-align: center;
@@ -118,24 +249,25 @@ st.markdown(
 )
 
 # ─────────────────────────────────────────────
-# BANNER
+# BANNER ATAS
 # ─────────────────────────────────────────────
 st.markdown(
     """
     <div class="banner">
-        <h1>👩🏻‍🔬 Sistem Rekomendasi Indikator Titrasi</h1>
-        <p>Pilih jenis titrasi → ikuti langkah → dapatkan rekomendasi indikator</p>
+        <h1>👩🏻‍🔬 Sistem Rekomendasi Titrasi</h1>
+        <p>Pilih jenis titrasi → Ikuti langkah → Dapatkan rekomendasi indikator</p>
+        <p>Pilih jenis metode standarisasi → Masukkan nilainya → Dapatkan hasil perhitungannya</p>
     </div>
     """,
     unsafe_allow_html=True,
 )
+
 
 # ─────────────────────────────────────────────
 # HELPER FUNCTIONS
 # ─────────────────────────────────────────────
 
 def card(title, rows: list, color="", starred=False):
-    """Render a styled indicator card."""
     extra = f' <span class="badge">⭐ Direkomendasikan</span>' if starred else ""
     body = "".join(f"<p>• {r}</p>" for r in rows)
     st.markdown(
@@ -154,16 +286,16 @@ def step(n, label):
     st.markdown(f"**{label}**")
 
 
-# =========================
+# =============================================
 # MENU UTAMA
-# =========================
+# =============================================
 st.markdown("### 🎯 Pilih Tujuan")
 
 fitur = st.radio(
     "",
     [
-        "Menentukan Indikator Titrasi",
-        "Menghitung Standarisasi Larutan"
+        "MENENTUKAN INDIKATOR TITRASI",
+        "MENGHITUNG STANDARISASI LARUTAN"
     ]
 )
 
@@ -172,105 +304,121 @@ st.divider()
 # ─────────────────────────────────────────────
 # FITUR 1 — STANDARISASI LARUTAN
 # ─────────────────────────────────────────────
-if fitur == "Menghitung Standarisasi Larutan":
+if fitur == "MENGHITUNG STANDARISASI LARUTAN":
 
-    st.subheader("🧪 Perhitungan Standarisasi Larutan")
+    st.subheader("🧪 PERHITUNGAN STANDARISASI LARUTAN")
 
-    # FIX: gunakan selectbox dengan pilihan string biasa, bukan st.button()
     metode = st.selectbox(
         "Pilih Metode Standarisasi",
         [
-            "── Pilih ──",
-            "NaOH dengan Asam Oksalat",
-            "HCl dengan Boraks",
-            "KMnO4 dengan Asam Oksalat",
-            "Na2S2O3 dengan Kalium Dikromat",
-            "EDTA dengan CaCO3",
+            "── PILIH ──",
+            "Natrium Hidroksida (NaOH) dengan Asam Oksalat (H₂C₂O₄)",
+            "Asam Klorida (HCl) dengan Boraks (Na₂B₄O₇.10H₂O)",
+            "Kalium Permanganat (KMnO₄) dengan Asam Oksalat (H₂C₂O₄)",
+            "Tiosulfat (Na₂S₂O₃) dengan Kalium Dikromat (K₂Cr₂O₇)",
+            "EDTA (C₁₀H₁₆N₂O₈) dengan Kalium Karbonat (CaCO₃)",
         ]
     )
 
-    if metode == "NaOH dengan Asam Oksalat":
-        massa = st.number_input("Massa Asam Oksalat (g)", min_value=0.0, format="%.4f")
+    if metode == "Natrium Hidroksida (NaOH) dengan Asam Oksalat (H₂C₂O₄)":
+        massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 0.063  # mg/mgrek (BM=126, valensi=2 → BE=63 g/ek = 0.063 mg/mgrek)
+                BE = 63.0  
                 N = massa / ((100 / 25) * volume * BE)
+                st.write("**Rumus:**")
+                st.code("N = massa Asam Oksalat (mg) / ((100mL / 25mL) × volume NaOH (mL) × BE Asam Oksalat)")
+                st.write("**Perhitungan:**")
+                st.write(f"N = {massa:.1f} mg / (4 × {volume:.2f} mL × {BE} mg/mgrek)")
                 st.success(f"Normalitas NaOH = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
-    elif metode == "HCl dengan Boraks":
-        massa = st.number_input("Massa Boraks (g)", min_value=0.0, format="%.4f")
+    elif metode == "Asam Klorida (HCl) dengan Boraks (Na₂B₄O₇.10H₂O)":
+        massa = st.number_input("Massa Boraks (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume HCl (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 0.1907  # mg/mgrek (BM=381.4, valensi=2 → BE=190.7 g/ek = 0.1907 mg/mgrek)
+                BE = 190.7  
                 N = massa / ((100 / 25) * volume * BE)
+                st.write("**Rumus:**")
+                st.code("N = massa Boraks (mg) / ((100mL / 25mL) × volume HCl (mL) × BE Boraks)")
+                st.write("**Perhitungan:**")
+                st.write(f"N = {massa:.1f} mg / (4 × {volume:.2f} mL × {BE} mg/mgrek)")
                 st.success(f"Normalitas HCl = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
-    elif metode == "KMnO4 dengan Asam Oksalat":
-        massa = st.number_input("Massa Asam Oksalat (g)", min_value=0.0, format="%.4f")
-        volume = st.number_input("Volume KMnO4 (mL)", min_value=0.0, format="%.2f")
+    elif metode == "Kalium Permanganat (KMnO₄) dengan Asam Oksalat (H₂C₂O₄)":
+        massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.1f")
+        volume = st.number_input("Volume KMnO₄ (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 0.063  # mg/mgrek (BM=126, valensi=2 → BE=63 g/ek = 0.063 mg/mgrek)
+                BE = 63.0  
                 N = massa / ((100 / 25) * volume * BE)
+                st.write("**Rumus:**")
+                st.code("N = massa Asam Oksalat (mg) / ((100mL / 25mL) × volume KMnO₄ (mL) × BE Asam Oksalat)")
+                st.write("**Perhitungan:**")
+                st.write(f"N = {massa:.1f} mg / (4 × {volume:.2f} mL × {BE} mg/mgrek)")
                 st.success(f"Normalitas KMnO₄ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
-    elif metode == "Na2S2O3 dengan Kalium Dikromat":
-        massa = st.number_input("Massa K2Cr2O7 (g)", min_value=0.0, format="%.4f")
-        volume = st.number_input("Volume Na2S2O3 (mL)", min_value=0.0, format="%.2f")
+    elif metode == "Tiosulfat (Na₂S₂O₃) dengan Kalium Dikromat (K₂Cr₂O₇)":
+        massa = st.number_input("Massa K₂Cr₂O₇ (mg)", min_value=0.0, format="%.1f")
+        volume = st.number_input("Volume Na₂S₂O₃ (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 0.04904  # mg/mgrek (BM=294.2, valensi=6 → BE=49.04 g/ek = 0.04904 mg/mgrek)
-                N = massa / (volume * BE)
+                BE = 49.04  
+                N = massa / ((100 / 25) * volume * BE)
+                st.write("**Rumus:**")
+                st.code("N = massa K₂Cr₂O₇ (mg) / ((100mL / 25mL) × volume Tiosulfat (mL) × BE K₂Cr₂O₇)")
+                st.write("**Perhitungan:**")
+                st.write(f"N = {massa:.1f} mg / (4 × {volume:.2f} mL × {BE} mg/mgrek)")
                 st.success(f"Normalitas Na₂S₂O₃ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
-    elif metode == "EDTA dengan CaCO3":
-        massa = st.number_input("Massa CaCO3 (mg)", min_value=0.0, format="%.4f")
+    elif metode == "EDTA (C₁₀H₁₆N₂O₈) dengan Kalium Karbonat (CaCO₃)":
+        massa = st.number_input("Massa CaCO₃ (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BM = 100.09  # mg/mmol
+                BM = 100.09  
                 M = massa / ((100 / 25) * volume * BM)
-                st.success(f"Molaritas EDTA = {M:.4f} mmol/mL (M)")
+                st.write("**Rumus:**")
+                st.code("M = massa CaCO₃ (mg) / ((100mL / 25mL) × volume EDTA (mL) × BM CaCO₃)") 
+                st.write("**Perhitungan:**")
+                st.write(f"M = {massa:.1f} mg / (4 × {volume:.2f} mL × {BM} mg/mmol)")
+                st.success(f"Molaritas EDTA = {M:.4f} M")
             else:
                 st.error("Volume tidak boleh 0.")
 
 # ─────────────────────────────────────────────
 # FITUR 2 — MENENTUKAN INDIKATOR
 # ─────────────────────────────────────────────
-elif fitur == "Menentukan Indikator Titrasi":
+elif fitur == "MENENTUKAN INDIKATOR TITRASI":
 
-    step(1, "Pilih Jenis Titrasi")
+    st.subheader("🧪 PILIH JENIS TITRASI")
 
     JENIS = [
-        "── Pilih ──",
-        "🔴 Titrasi Asam-Basa",
-        "🟡 Titrasi Redoks",
-        "🟣 Titrasi Kompleksometri",
-        "🟢 Titrasi Argentometri",
+        "── PILIH ──",
+        "🔴 JENIS TITRASI ASAM-BASA",
+        "🟡 TITRASI REDOKS",
+        "🟣 TITRASI KOMPLEKSOMETRI",
+        "🟢 TITRASI ARGENTOMETRI",
     ]
     pilih_jenis = st.selectbox("Jenis Titrasi", JENIS, label_visibility="collapsed")
 
     st.divider()
 
-    # ═══════════════════════════════════════════
-    # BRANCH 1 — TITRASI ASAM-BASA
-    # ═══════════════════════════════════════════
-    if pilih_jenis == "🔴 Titrasi Asam-Basa":
-        st.subheader("🔴 Titrasi Asam-Basa")
+    if pilih_jenis == "🔴 JENIS TITRASI ASAM-BASA":
+        st.subheader("🔴 JENIS TITRASI ASAM-BASA")
         col1, col2 = st.columns(2)
 
         with col1:
-            step(2, "Jenis Titran Asam-Basa")
+            step(2, "JENIS TITRASI ASAM-BASA")
             titran = st.radio(
                 "Titran",
                 [
@@ -305,19 +453,16 @@ elif fitur == "Menentukan Indikator Titrasi":
                      "pH ekuivalen > 7 → ideal"], "red", True)
                 warn("Jangan gunakan metil oranye, metil merah dan BTB — Pengamatan pada titik akhir akan kurang jelas karena trayek pH tidak sesuai dengan titik ekuivalen.")
 
-            else:  # Asam Lemah oleh Basa Lemah
+            else:  
                 warn(
                     "Titrasi asam lemah – basa lemah <b>tidak direkomendasikan</b> secara analitik "
                     "karena tidak memiliki titik ekuivalen yang tajam, sehingga titik akhir titrasi sangat sulit dideteksi menggunakan indikator warna standar.")
 
         done()
 
-    # ═══════════════════════════════════════════
-    # BRANCH 2 — TITRASI REDOKS
-    # ═══════════════════════════════════════════
-    elif pilih_jenis == "🟡 Titrasi Redoks":
-        st.subheader("🟡 Titrasi Redoks")
-        step(2, "Pilih Metode Titrasi Redoks")
+    elif pilih_jenis == "🟡 TITRASI REDOKS":
+        st.subheader("🟡 TITRASI REDOKS")
+        step(2, "PILIH METODE TITRASI REDOKS")
         metode = st.radio(
             "Metode",
             ["Permanganometri", "Iodometri / Iodimetri"],
@@ -345,7 +490,7 @@ elif fitur == "Menentukan Indikator Titrasi":
                 "red",
             )
 
-        else:  # Iodometri / Iodimetri
+        else:  
             card(
                 "Larutan Kanji (Amilum)",
                 [
@@ -363,11 +508,8 @@ elif fitur == "Menentukan Indikator Titrasi":
 
         done()
 
-    # ═══════════════════════════════════════════
-    # BRANCH 3 — TITRASI KOMPLEKSOMETRI
-    # ═══════════════════════════════════════════
-    elif pilih_jenis == "🟣 Titrasi Kompleksometri":
-        st.subheader("🟣 Titrasi Kompleksometri (EDTA)")
+    elif pilih_jenis == "🟣 TITRASI KOMPLEKSOMETRI":
+        st.subheader("🟣 TITRASI KOMPLEKSOMETRI (EDTA)")
         step(2, "Pilih Ion Logam yang Dititrasi")
 
         ION_DATA = {
@@ -427,12 +569,9 @@ elif fitur == "Menentukan Indikator Titrasi":
             )
             done()
 
-    # ═══════════════════════════════════════════
-    # BRANCH 4 — TITRASI ARGENTOMETRI
-    # ═══════════════════════════════════════════
-    elif pilih_jenis == "🟢 Titrasi Argentometri":
-        st.subheader("🟢 Titrasi Argentometri")
-        step(2, "Pilih Metode Argentometri")
+    elif pilih_jenis == "🟢 TITRASI ARGENTOMETRI":
+        st.subheader("🟢 TITRASI ARGENTOMETRI")
+        step(2, "PILIH METODE ARGENTOMETRI")
         metode = st.radio(
             "Metode",
             ["Argentometri (Mohr)", "Argentometri (Volhard)", "Argentometri (Fajans)"],
@@ -470,7 +609,7 @@ elif fitur == "Menentukan Indikator Titrasi":
                 "pelarut organik agar SCN⁻ tidak bereaksi dengan AgCl."
             )
 
-        else:  # Fajans
+        else:  
             card(
                 "Diklorofluoresein",
                 [
@@ -497,32 +636,64 @@ elif fitur == "Menentukan Indikator Titrasi":
 
         done()
 
-    # ─────────────────────────────────────────────
-    # PLACEHOLDER — belum pilih jenis
-    # ─────────────────────────────────────────────
     else:
         st.info("👆 Pilih jenis titrasi di atas untuk memulai.", icon="⚠️")
+        
+        # PERUBAHAN 1: Membungkus Tabel Panduan Singkat ke dalam Kotak Putih Khusus (.custom-white-box)
         st.markdown(
             """
-            **Panduan singkat:**
-            | Jenis | Titran | Contoh Analit |
-            |---|---|---|
-            | Asam-Basa | NaOH / HCl | CH₃COOH, Na₂CO₃ |
-            | Redoks | KMnO₄ / Na₂S₂O₃ | Fe²⁺, Cl⁻, I₂ |
-            | Kompleksometri | EDTA | Ca²⁺, Mg²⁺, Zn²⁺ |
-            | Pengendapan | AgNO₃ | Cl⁻, Br⁻, I⁻ |
-            """
+            <div class="custom-white-box">
+                <p style="margin-bottom: 8px; color: black !important; font-weight: bold !important;">Panduan singkat:</p>
+                <table style="width:100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid black;">
+                            <th style="text-align:left; padding: 8px; color: black !important; font-weight: bold !important;">Jenis</th>
+                            <th style="text-align:left; padding: 8px; color: black !important; font-weight: bold !important;">Titran</th>
+                            <th style="text-align:left; padding: 8px; color: black !important; font-weight: bold !important;">Contoh Analit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Asam-Basa</td>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">NaOH / HCl</td>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">CH₃COOH, Na₂CO₃</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Redoks</td>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">KMnO₄ / Na₂S₂O₃</td>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Fe²⁺, Cl⁻, I₂</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Kompleksometri</td>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">EDTA</td>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Ca²⁺, Mg²⁺, Zn²⁺</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Pengendapan</td>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">AgNO₃</td>
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Cl⁻, Br⁻, I⁻</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
 # ─────────────────────────────────────────────
 # FOOTER
 # ─────────────────────────────────────────────
 st.divider()
+
+# PERUBAHAN 2: Membungkus Teks Footer dengan latar belakang kotak putih (.custom-white-box) 
+# serta memberikan ketebalan maksimal
 st.markdown(
     """
-    <div style='text-align:center; color:#999; font-size:.8em; margin-top:4px'>
-        🥉 Sistem Rekomendasi Indikator Titrasi &nbsp;|&nbsp; Kelompok 8
+    <div class="custom-white-box" style="text-align:center; max-width: 400px; margin: 0 auto;">
+        <span style='color: #000000 !important; font-weight: 900 !important; font-size: .9em;'>
+            ⚛️ Sistem Rekomendasi Titrasi &nbsp;|&nbsp; Kelompok 5
+        </span>
     </div>
     """,
     unsafe_allow_html=True,
-)
+                )
