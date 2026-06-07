@@ -246,7 +246,7 @@ st.markdown(
 st.markdown(
     """
     <div class="banner">
-        <h1>👩🏻‍🔬 Sistem Rekomendasi Titrasi</h1>
+        <h1>👩🏻‍🔬 Sistem Rekomendasi Indikator Titrasi yang Dilengkapi dengan Perhitungan Standardisasi Larutan</h1>
         <p>Pilih jenis titrasi → Ikuti langkah → Dapatkan rekomendasi indikator</p>
         <p>Pilih jenis metode standarisasi → Masukkan nilainya → Dapatkan hasil perhitungannya</p>
     </div>
