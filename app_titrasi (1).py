@@ -13,13 +13,28 @@ page_bg_img = """
 <style>
 
 /* Background Utama Aplikasi */
-.stApp {
-    background-image: url("chenspec-science-6575273.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
+def set_background(image_file):
+    with open(image_file, "rb") as f:
+        data = base64.b64encode(f.read()).decode()
+    st.markdown(f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/jpeg;base64,{data}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+    [data-testid="stHeader"] {{
+        background: rgba(0,0,0,0);
+    }}
+    [data-testid="stSidebar"] {{
+        background: rgba(255,255,255,0.85);
+    }}
+    </style>
+    """, unsafe_allow_html=True)
+
+set_background("chenspec-science-6575273.jpg"
 
 /* Memaksa semua teks di luar box berwarna hitam tebal */
 h1, h2, h3, h4, h5, h6,
