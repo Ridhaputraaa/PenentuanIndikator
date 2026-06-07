@@ -85,18 +85,18 @@ div[data-baseweb="input"] {
 /* Mengubah background bagian dalam input agar transparan mengikuti gradasi */
 div[data-baseweb="input"] input {
     background-color: transparent !important;
-    color: white !important; /* Teks angka saat dimasukkan berwarna putih */
+    color: black !important; /* Teks angka saat dimasukkan berwarna putih */
     font-weight: bold !important;
 }
 
 /* Memastikan teks nilai berwarna putih saat posisi fokus/diklik */
 div[data-baseweb="input"] input:focus {
-    color: white !important;
+    color: black !important;
 }
 
 /* Memaksa tombol plus/minus (+ dan -) bawaan Streamlit berwarna putih */
 div[data-baseweb="input"] button {
-    color: white !important;
+    color: black !important;
     background-color: transparent !important;
 }
 
