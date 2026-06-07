@@ -14,7 +14,7 @@ page_bg_img = """
 
 /* Background Utama Aplikasi */
 .stApp {
-    background-image: url("https://pixabay.com/id/images/download/chenspec-science-6575273_1920.jpg");
+    background-image: url("chenspec-science-6575273.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
