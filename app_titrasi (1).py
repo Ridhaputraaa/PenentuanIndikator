@@ -19,12 +19,10 @@ st.set_page_config(
 ASSET_DIR = Path(__file__).parent / "assets"
 BG_IMAGE_PATH = ASSET_DIR / "lab_background.jpg"
 
-
 @st.cache_data
 def _muat_base64(path: Path) -> str:
     with open(path, "rb") as f:
         return base64.b64encode(f.read()).decode()
-
 
 _BG_B64 = _muat_base64(BG_IMAGE_PATH) if BG_IMAGE_PATH.exists() else ""
 
@@ -32,22 +30,18 @@ _BG_B64 = _muat_base64(BG_IMAGE_PATH) if BG_IMAGE_PATH.exists() else ""
 # rekomendasi yang sudah ada di aplikasi) supaya latar belakang foto lab ini
 # ikut "hidup" / menyesuaikan suasana sesuai apa yang sedang dikerjakan user.
 TEMA_WARNA = {
-    "default":        "50,140,193",   # biru   - tampilan awal / netral
-    "standarisasi":   "0,137,123",    # teal   - fitur perhitungan standarisasi
-    "asam_basa":      "229,57,53",    # merah  - titrasi asam-basa
-    "redoks_kmno4":   "142,36,170",   # ungu   - permanganometri
-    "redoks_iodo":    "0,137,123",    # teal   - iodometri/iodimetri
-    "kompleksometri": "142,36,170",   # ungu   - EDTA
-    "argentometri_mohr":    "249,168,37",  # kuning - Mohr
-    "argentometri_volhard": "229,57,53",   # merah  - Volhard
-    "argentometri_fajans":  "67,160,71",   # hijau  - Fajans
+    "default":        "50,140,193",
+    "standarisasi":   "0,137,123",
+    "asam_basa":      "229,57,53",
+    "redoks_kmno4":   "142,36,170",
+    "redoks_iodo":    "0,137,123",
+    "kompleksometri": "142,36,170",
+    "argentometri_mohr":    "249,168,37",
+    "argentometri_volhard": "229,57,53",
+    "argentometri_fajans":  "67,160,71",
 }
 
-
 def set_background(tema: str = "default", opacity: float = 0.42):
-    """Memasang foto laboratorium sebagai latar belakang aplikasi, dengan
-    lapisan warna (tint) yang berubah‑ubah secara halus mengikuti menu/aktivitas
-    yang sedang dipilih oleh pengguna."""
     if not _BG_B64:
         return
     accent = TEMA_WARNA.get(tema, TEMA_WARNA["default"])
@@ -78,41 +72,26 @@ def set_background(tema: str = "default", opacity: float = 0.42):
         unsafe_allow_html=True,
     )
 
-
-# Pasang latar belakang versi default sejak awal (sebelum user memilih apa pun)
+# Pasang latar belakang versi default sejak awal
 set_background("default")
 
 page_bg_img = """
 <style>
-
-
-/* Memaksa semua teks di luar box berwarna hitam tebal */
 h1, h2, h3, h4, h5, h6,
 p, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label {
     color: black !important;
     font-weight: bold !important;
 }
-
-/* ─────────────────────────────────────────────────────────────
-   🎯 DROPDOWN & INPUT BOX - GRADASI BIRU & TEKS PUTIH
-   ───────────────────────────────────────────────────────────── */
-
-/* ==================== 1. SELECTBOX (DROPDOWN) ==================== */
-/* Kotak Utama Selectbox Sebelum Diklik (Gradasi Biru) */
 div[data-baseweb="select"] > div {
     background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
-
-/* Teks di dalam kotak utama sebelum diklik (Warna Putih) */
 div[data-baseweb="select"] span, 
 div[data-baseweb="select"] div {
     color: white !important;
     font-weight: bold !important;
 }
-
-/* Daftar pilihan saat diklik (Menu Popover) */
 div[data-baseweb="popover"] ul,
 div[role="listbox"],
 [data-baseweb="menu"],
@@ -122,8 +101,6 @@ div[role="listbox"],
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
-
-/* Baris Opsi Pilihan di Dalam Dropdown (Tampilan Awal & Diklik) */
 div[role="option"],
 div[role="option"] span,
 div[role="option"] div,
@@ -134,8 +111,6 @@ li[role="option"] span {
     font-weight: bold !important;
     font-size: 14px !important;
 }
-
-/* Efek ketika opsi dropdown disorot/hover (Hover) */
 div[role="option"]:hover,
 div[role="option"]:active,
 li[role="option"]:hover,
@@ -145,38 +120,23 @@ div[data-baseweb="popover"] ul li:hover {
     background: #328cc1 !important;
     color: white !important;
 }
-
-
-/* ==================== 2. NUMBER INPUT BOX ==================== */
-/* Kotak Utama Input Nilai (Gradasi Biru) */
 div[data-baseweb="input"] {
     background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
-
-/* Mengubah background bagian dalam input agar transparan mengikuti gradasi */
 div[data-baseweb="input"] input {
     background-color: transparent !important;
-    color: black !important; /* Teks angka saat dimasukkan berwarna putih */
+    color: black !important;
     font-weight: bold !important;
 }
-
-/* Memastikan teks nilai berwarna putih saat posisi fokus/diklik */
 div[data-baseweb="input"] input:focus {
     color: black !important;
 }
-
-/* Memaksa tombol plus/minus (+ dan -) bawaan Streamlit berwarna putih */
 div[data-baseweb="input"] button {
     color: black !important;
     background-color: transparent !important;
 }
-
-
-/* ==================== 3. KONTEN LAINNYA ==================== */
-/* Lapisan putih semi-transparan ("kaca") di tengah agar teks tetap mudah
-   dibaca walau latar belakang berupa foto laboratorium */
 .main .block-container {
     background: rgba(255,255,255,0.80);
     backdrop-filter: blur(6px);
@@ -185,20 +145,14 @@ div[data-baseweb="input"] button {
     border-radius: 18px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
-
-/* Tabel markdown */
 table, th, td {
     color: black !important;
     font-weight: bold !important;
 }
-
-/* Kotak info bawaan Streamlit */
 .stInfo {
     color: black !important;
     font-weight: bold !important;
 }
-
-/* GAYA KHUSUS UNTUK KOTAK PUTIH TABEL PANDUAN DAN FOOTER */
 .custom-white-box {
     background-color: rgba(255, 255, 255, 0.9) !important;
     padding: 15px;
@@ -207,12 +161,10 @@ table, th, td {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
 </style>
 """
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
 
 # ─────────────────────────────────────────────
 # CUSTOM CSS UNTUK BANNER DAN CARD
@@ -221,18 +173,15 @@ st.markdown(
     """
     <style>
         body { font-family: 'Segoe UI', sans-serif; }
-        
         .banner h1 {
             color: #0b3c5d !important; 
             font-weight: bold !important;
             font-size: 2em;
         }
-
         .banner p {
             color: #328cc1 !important; 
             font-weight: bold !important;
         }
-
         .banner {
             background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
             border-radius: 14px;
@@ -241,7 +190,6 @@ st.markdown(
             margin-bottom: 28px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
-
         /* Kartu Rekomendasi Indikator */
         .card {
             background: #ffffff !important;
@@ -251,23 +199,19 @@ st.markdown(
             border-left: 6px solid #2196F3;
             box-shadow: 0 2px 8px rgba(0,0,0,.08);
         }
-
         .card.red    { border-color: #e53935; }
         .card.green  { border-color: #43a047; }
         .card.orange { border-color: #fb8c00; }
         .card.purple { border-color: #8e24aa; }
         .card.yellow { border-color: #f9a825; }
         .card.teal   { border-color: #00897b; }
-
-        /* Memaksa tulisan di dalam kartu SELALU HITAM */
+        /* Tulisan di dalam kartu selalu hitam */
         .card, .card h4, .card p, .card span, .card li {
             color: #000000 !important;
             font-weight: bold !important;
         }
-
         .card h4 { margin: 0 0 6px 0; font-size: 1.05em; }
         .card p { margin: 2px 0; font-size: .93em; }
-
         .badge {
             display: inline-block;
             background: #fff8e1;
@@ -278,7 +222,6 @@ st.markdown(
             font-size: .8em;
             margin-top: 6px;
         }
-
         .warn {
             background: #fff3e0;
             border-left: 5px solid #FF9800;
@@ -290,7 +233,6 @@ st.markdown(
         }
         .warn b { color: #e65100 !important; }
         .warn * { color: #5d4037 !important; }
-
         .step-badge {
             display: inline-block;
             background: #e8eaf6;
@@ -301,7 +243,6 @@ st.markdown(
             font-weight: 600;
             margin-bottom: 12px;
         }
-
         .done {
             background: linear-gradient(90deg,#e8f5e9,#f1f8e9);
             border: 1.5px solid #a5d6a7;
@@ -387,11 +328,9 @@ with st.sidebar:
         "5. Ridha Putra Pertama"
     )
 
-
 # ─────────────────────────────────────────────
 # HELPER FUNCTIONS
 # ─────────────────────────────────────────────
-
 def card(title, rows: list, color="", starred=False):
     extra = f' <span class="badge">⭐ Direkomendasikan</span>' if starred else ""
     body = "".join(f"<p>• {r}</p>" for r in rows)
@@ -409,7 +348,6 @@ def done():
 def step(n, label):
     st.markdown(f'<div class="step-badge">Langkah {n}</div>', unsafe_allow_html=True)
     st.markdown(f"**{label}**")
-
 
 # =============================================
 # MENU UTAMA
@@ -433,9 +371,7 @@ st.divider()
 # FITUR 1 — STANDARISASI LARUTAN
 # ─────────────────────────────────────────────
 if fitur == "MENGHITUNG STANDARISASI LARUTAN":
-
     st.subheader("🧪 PERHITUNGAN STANDARISASI LARUTAN")
-
     metode = st.selectbox(
         "Pilih Metode Standarisasi",
         [
@@ -527,9 +463,7 @@ if fitur == "MENGHITUNG STANDARISASI LARUTAN":
 # FITUR 2 — MENENTUKAN INDIKATOR
 # ─────────────────────────────────────────────
 elif fitur == "MENENTUKAN INDIKATOR TITRASI":
-
     st.subheader("🧪 PILIH JENIS TITRASI")
-
     JENIS = [
         "── PILIH ──",
         "🔴 JENIS TITRASI ASAM-BASA",
@@ -538,7 +472,6 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         "🟢 TITRASI ARGENTOMETRI",
     ]
     pilih_jenis = st.selectbox("Jenis Titrasi", JENIS, label_visibility="collapsed")
-
     st.divider()
 
     if pilih_jenis == "🔴 JENIS TITRASI ASAM-BASA":
@@ -562,31 +495,24 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         with col2:
             st.divider()
             st.subheader("💡 Rekomendasi Indikator")
-
             if titran == "Asam Kuat oleh Basa Kuat":
                 card("Bromtimol Biru", ["Rentang pH: 6.0 – 7.6",
                      "Perubahan: Kuning → Biru", "Warna hijau akan muncul sebagai warna antara"], "teal", True)
                 card("Fenolftalein", ["Rentang pH: 8.2 – 10.0",
                      "Perubahan: Tidak berwarna → Pink"], "red")
-
             elif titran == "Basa Lemah oleh Asam Kuat":
                 card("Metil Jingga", ["Rentang pH: 3.1 – 4.4",
                      "Perubahan: Kuning → Merah", "Sangat sesuai untuk titik ekuivalen yang bersifat asam"], "orange", True)
                 card("Metil Merah", ["Rentang pH: 4.2 – 6.2",
                      "Perubahan: Kuning → Merah", "Warna jingga akan muncul sebagai warna antara"], "red")
                 warn("Fenolftalein tidak direkomendasikan karena perubahan warnanya terjadi pada daerah basa.")
-
             elif titran == "Asam Lemah oleh Basa Kuat":
                 card("Fenolftalein", ["Rentang pH: 8.2 – 10.0",
                      "Perubahan: Tidak berwarna → Pink",
                      "pH ekuivalen > 7 → ideal"], "red", True)
                 warn("Jangan gunakan metil oranye, metil merah dan BTB — Pengamatan pada titik akhir akan kurang jelas karena trayek pH tidak sesuai dengan titik ekuivalen.")
-
-            else:  
-                warn(
-                    "Titrasi asam lemah – basa lemah <b>tidak direkomendasikan</b> secara analitik "
-                    "karena tidak memiliki titik ekuivalen yang tajam, sehingga titik akhir titrasi sangat sulit dideteksi menggunakan indikator warna standar.")
-
+            else:
+                warn("Titrasi asam lemah – basa lemah <b>tidak direkomendasikan</b> secara analitik karena tidak memiliki titik ekuivalen yang tajam, sehingga titik akhir titrasi sangat sulit dideteksi menggunakan indikator warna standar.")
         done()
 
     elif pilih_jenis == "🟡 TITRASI REDOKS":
@@ -601,102 +527,56 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         set_background("redoks_kmno4" if metode == "Permanganometri" else "redoks_iodo")
         st.divider()
         st.subheader("💡 Rekomendasi Indikator")
-
         if metode == "Permanganometri":
             card("KMnO₄ — Autoindicator",
-                [
-                    "KMnO₄ sendiri bertindak sebagai indikator",
-                    "Titik akhir: larutan berubah merah muda",
-                    "Titrasi dalam suasana asam (H₂SO₄ encer)",
-                ], "purple", True)
+                ["KMnO₄ sendiri bertindak sebagai indikator", "Titik akhir: larutan berubah merah muda", "Titrasi dalam suasana asam (H₂SO₄ encer)"], "purple", True)
             warn("Penggunaan blanko sangat dianjurkan untuk mengoreksi hasil titrasi.")
-            card(
-                "Ferroin (1,10-fenantrolin)",
-                [
-                    "Dalam keadaan tereduksi, kompleks ini berwarna merah pekat.",
-                    "Ketika dioksidasi, kompleks ini berubah menjadi berwarna biru pucat (atau biru).",
-                    "Perubahan warna ini bersifat reversibel",
-                ],
-                "red",
-            )
-
-        else:  
-            card(
-                "Larutan Kanji (Amilum)",
-                [
-                    "Digunakan pada titrasi redoks yang melibatkan iodin (I₂)",
-                    "Perubahan: Biru → Tidak berwarna (saat I₂ habis)",
-                ],
-                "teal",
-                True,
-            )
-            warn(
-                "Tambahkan larutan kanji <b>menjelang titik akhir titrasi</b> (saat warna sudah pucat kuning), "
-                "bukan di awal — amilum yang berikatan terlalu lama dengan I₂ sulit terurai sehingga "
-                "titik akhir menjadi tidak tajam."
-            )
-
+            card("Ferroin (1,10-fenantrolin)", ["Dalam keadaan tereduksi, kompleks ini berwarna merah pekat.", "Ketika dioksidasi, kompleks ini berubah menjadi berwarna biru pucat (atau biru).", "Perubahan warna ini bersifat reversibel"], "red")
+        else:
+            card("Larutan Kanji (Amilum)", ["Digunakan pada titrasi redoks yang melibatkan iodin (I₂)", "Perubahan: Biru → Tidak berwarna (saat I₂ habis)"], "teal", True)
+            warn("Tambahkan larutan kanji <b>menjelang titik akhir titrasi</b> (saat warna sudah pucat kuning), bukan di awal — amilum yang berikatan terlalu lama dengan I₂ sulit terurai sehingga titik akhir menjadi tidak tajam.")
         done()
 
     elif pilih_jenis == "🟣 TITRASI KOMPLEKSOMETRI":
         st.subheader("🟣 TITRASI KOMPLEKSOMETRI (EDTA)")
         step(2, "Pilih Ion Logam yang Dititrasi")
-
         ION_DATA = {
             "Ca²⁺ / Mg²⁺": [
-                ("EBT (Eriochrome Black T)", ["pH 10 — buffer amonia/amonium klorida",
-                 "Perubahan: Merah anggur → Biru"], "teal", True),
+                ("EBT (Eriochrome Black T)", ["pH 10 — buffer amonia/amonium klorida", "Perubahan: Merah anggur → Biru"], "teal", True),
             ],
             "Zn²⁺": [
-                ("EBT (Eriochrome Black T)", ["pH 10 — buffer amonia",
-                 "Perubahan: Merah anggur → Biru"], "teal", True),
+                ("EBT (Eriochrome Black T)", ["pH 10 — buffer amonia", "Perubahan: Merah anggur → Biru"], "teal", True),
             ],
             "Cu²⁺": [
                 ("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True),
             ],
             "Fe²⁺ / Fe³⁺": [
-                ("Asam salisilat", ["pH 1–2 (untuk Fe³⁺ — suasana sangat asam)",
-                 "Perubahan: Merah → Tidak berwarna"], "red", True),
+                ("Asam salisilat", ["pH 1–2 (untuk Fe³⁺ — suasana sangat asam)", "Perubahan: Merah → Tidak berwarna"], "red", True),
                 ("Tiron", ["pH 4–10", "Perubahan: Biru → Tidak berwarna"], "teal", False),
             ],
             "Pb²⁺": [
-                ("Xylenol Orange", ["pH 5–6 — buffer heksamin",
-                 "Perubahan: Merah-ungu → Kuning"], "orange", True),
+                ("Xylenol Orange", ["pH 5–6 — buffer heksamin", "Perubahan: Merah-ungu → Kuning"], "orange", True),
             ],
             "Hg²⁺": [
-                ("Xylenol Orange", ["pH 2–3 (asam nitrat encer)",
-                 "Perubahan: Merah → Kuning"], "orange", True),
+                ("Xylenol Orange", ["pH 2–3 (asam nitrat encer)", "Perubahan: Merah → Kuning"], "orange", True),
             ],
             "Al³⁺": [
-                ("Xylenol Orange + titrasi balik", ["pH 5",
-                 "Perubahan: Kuning → Merah-ungu"], "orange", True),
+                ("Xylenol Orange + titrasi balik", ["pH 5", "Perubahan: Kuning → Merah-ungu"], "orange", True),
             ],
             "Ni²⁺": [
-                ("Murexide", ["pH 8–9 — buffer amonia",
-                 "Perubahan: Kuning → Ungu"], "purple", True),
+                ("Murexide", ["pH 8–9 — buffer amonia", "Perubahan: Kuning → Ungu"], "purple", True),
             ],
             "Co²⁺": [
-                ("Murexide", ["pH 8–9 — buffer amonia",
-                 "Perubahan: Kuning → Ungu"], "purple", True),
+                ("Murexide", ["pH 8–9 — buffer amonia", "Perubahan: Kuning → Ungu"], "purple", True),
             ],
         }
-
-        ion = st.selectbox(
-            "Ion Logam",
-            ["── Pilih Ion Logam ──"] + list(ION_DATA.keys()),
-            label_visibility="collapsed",
-        )
-
+        ion = st.selectbox("Ion Logam", ["── Pilih Ion Logam ──"] + list(ION_DATA.keys()), label_visibility="collapsed")
         if ion != "── Pilih Ion Logam ──":
             st.divider()
             st.subheader(f"💡 Rekomendasi Indikator untuk **{ion}**")
             for name, rows, color, starred in ION_DATA[ion]:
                 card(name, rows, color, starred)
-            warn(
-                "Titrasi kompleksometri umumnya menggunakan <b>EDTA (Na₂H₂Y)</b> sebagai titran. "
-                "Pastikan pH larutan sesuai agar kompleks logam-indikator terbentuk dan terlepas dengan baik "
-                "di titik akhir."
-            )
+            warn("Titrasi kompleksometri umumnya menggunakan <b>EDTA (Na₂H₂Y)</b> sebagai titran. Pastikan pH larutan sesuai agar kompleks logam-indikator terbentuk dan terlepas dengan baik di titik akhir.")
             done()
 
     elif pilih_jenis == "🟢 TITRASI ARGENTOMETRI":
@@ -710,66 +590,20 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         )
         st.divider()
         st.subheader("💡 Rekomendasi Indikator")
-
         if metode == "Argentometri (Mohr)":
-            card(
-                "Kalium Kromat — K₂CrO₄",
-                [
-                    "Kondisi: pH 6.5 – 10,0 (netral – sedikit basa)",
-                    "Titik akhir: endapan merah bata (Ag₂CrO₄) permanen",
-                    "Analit: halida, CN⁻, dan CNS",
-                ], "yellow", True)
-            warn(
-                "Tidak dapat digunakan dalam suasana asam karena CrO₄²⁻ akan berubah menjadi Cr₂O₇²⁻. "
-                "Tidak dapat digunakan dalam suasana basa karena akan terbentuk endapan AgOH.")
-
+            card("Kalium Kromat — K₂CrO₄", ["Kondisi: pH 6.5 – 10,0 (netral – sedikit basa)", "Titik akhir: endapan merah bata (Ag₂CrO₄) permanen", "Analit: halida, CN⁻, dan CNS"], "yellow", True)
+            warn("Tidak dapat digunakan dalam suasana asam karena CrO₄²⁻ akan berubah menjadi Cr₂O₇²⁻. Tidak dapat digunakan dalam suasana basa karena akan terbentuk endapan AgOH.")
         elif metode == "Argentometri (Volhard)":
-            card(
-                "Besi(III) Amonium Sulfat — NH₄Fe(SO₄)₂",
-                [
-                    "Kondisi: suasana asam (HNO₃ 4N)",
-                    "Titik akhir: larutan berwarna merah (FeSCN²⁺) permanen",
-                    "Analit: Ag⁺, Cl⁻, Br⁻, I⁻",
-                ],
-                "red",
-                True,
-            )
-            warn(
-                "Untuk penetapan Cl⁻ secara tidak langsung, endapan AgCl harus disaring atau ditambahkan "
-                "pelarut organik agar SCN⁻ tidak bereaksi dengan AgCl."
-            )
-
-        else:  
-            card(
-                "Diklorofluoresein",
-                [
-                    "Kondisi: pH 4 – 10",
-                    "Titik akhir: endapan putih → merah muda",
-                    "Analit: Cl⁻, Br⁻, I⁻",
-                ],
-                "green",
-                True,
-            )
-            card(
-                "Fluoresein",
-                [
-                    "Kondisi: pH 7 – 8,5 (netral – sedikit basa)",
-                    "Titik akhir: endapan putih → merah muda",
-                    "Analit: Cl⁻",
-                ],
-                "green",
-            )
-            warn(
-                "Indikator adsorpsi (fluoresein/diklorofluoresein) bekerja dengan cara teradsorpsi pada "
-                "permukaan endapan AgX."
-            )
-
+            card("Besi(III) Amonium Sulfat — NH₄Fe(SO₄)₂", ["Kondisi: suasana asam (HNO₃ 4N)", "Titik akhir: larutan berwarna merah (FeSCN²⁺) permanen", "Analit: Ag⁺, Cl⁻, Br⁻, I⁻"], "red", True)
+            warn("Untuk penetapan Cl⁻ secara tidak langsung, endapan AgCl harus disaring atau ditambahkan pelarut organik agar SCN⁻ tidak bereaksi dengan AgCl.")
+        else:
+            card("Diklorofluoresein", ["Kondisi: pH 4 – 10", "Titik akhir: endapan putih → merah muda", "Analit: Cl⁻, Br⁻, I⁻"], "green", True)
+            card("Fluoresein", ["Kondisi: pH 7 – 8,5 (netral – sedikit basa)", "Titik akhir: endapan putih → merah muda", "Analit: Cl⁻"], "green")
+            warn("Indikator adsorpsi (fluoresein/diklorofluoresein) bekerja dengan cara teradsorpsi pada permukaan endapan AgX.")
         done()
-
     else:
         st.info("👆 Pilih jenis titrasi di atas untuk memulai.", icon="⚠️")
-        
-        # PERUBAHAN 1: Membungkus Tabel Panduan Singkat ke dalam Kotak Putih Khusus (.custom-white-box)
+        # Kotak panduan singkat
         st.markdown(
             """
             <div class="custom-white-box">
@@ -814,9 +648,6 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
 # FOOTER
 # ─────────────────────────────────────────────
 st.divider()
-
-# PERUBAHAN 2: Membungkus Teks Footer dengan latar belakang kotak putih (.custom-white-box) 
-# serta memberikan ketebalan maksimal
 st.markdown(
     """
     <div class="custom-white-box" style="text-align:center; max-width: 400px; margin: 0 auto;">
@@ -826,4 +657,4 @@ st.markdown(
     </div>
     """,
     unsafe_allow_html=True,
-                )
+)
