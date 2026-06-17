@@ -1,32 +1,43 @@
 import streamlit as st
-import base64
 from pathlib import Path
+import base64
 
-# ─────────────────────────────────────────────
-# PAGE CONFIG
-# ─────────────────────────────────────────────
-st.set_page_config(
-    page_title="Sistem Rekomendasi Indikator Titrasi yang Dilengkapi dengan Perhitungan Standardisasi Larutan",
-    page_icon="⚛️",
-    layout="centered",
-)
-
-# ─────────────────────────────────────────────
-# FOTO LATAR BELAKANG (LABORATORIUM)
-# Letakkan file foto di: assets/lab_background.jpg
-# (satu folder dengan file app_titrasi.py ini)
-# ─────────────────────────────────────────────
+# Path ke folder assets dan gambar
 ASSET_DIR = Path(__file__).parent / "assets"
 BG_IMAGE_PATH = ASSET_DIR / "WhatsApp Image 2026-06-17 at 22.58.12.jpeg"
 
+def load_base64_image(path):
+    try:
+        with open(path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    except FileNotFoundError:
+        return ""
 
-@st.cache_data
-def _muat_base64(path: Path) -> str:
-    with open(path, "rb") as f:
-        return base64.b64encode(f.read()).decode()
+_BG_B64 = load_base64_image(BG_IMAGE_PATH)
 
+def set_background():
+    if not _BG_B64:
+        st.warning("Gambar background tidak ditemukan.")
+        return
+    st.markdown(
+        f"""
+        <style>
+        [data-testid="stAppViewContainer"] {{
+            background-image: url("data:image/jpeg;base64,{_BG_B64}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-_BG_B64 = _muat_base64(BG_IMAGE_PATH) if BG_IMAGE_PATH.exists() else ""
+set_background()
+
+# Konten aplikasi
+st.title("Contoh Background Gambar")
+st.write("Background ini diambil dari gambar yang diupload ke folder assets.")
 
 # Palet warna "tema" untuk tiap aktivitas/menu (disamakan dengan warna kartu
 # rekomendasi yang sudah ada di aplikasi) supaya latar belakang foto lab ini
