@@ -17,7 +17,7 @@ st.set_page_config(
 # (satu folder dengan file app_titrasi.py ini)
 # ─────────────────────────────────────────────
 ASSET_DIR = Path(__file__).parent / "assets"
-BG_IMAGE_PATH = ASSET_DIR / "lab_background.jpg"
+BG_IMAGE_PATH = ASSET_DIR / "WhatsApp Image 2026-06-17 at 22.58.12.jpeg"
 
 
 @st.cache_data
