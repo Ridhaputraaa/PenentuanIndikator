@@ -292,24 +292,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ─────────────────────────────────────────────
-# IDENTITAS PEMBUAT APLIKASI (TIM PENGEMBANG)
-# ─────────────────────────────────────────────
-st.markdown(
-    """
-    <div class="custom-white-box" style="border-left:6px solid #0b3c5d;">
-        <p style="margin:0 0 10px 0; color:#0b3c5d !important; font-weight:900 !important; font-size:1.05em;">
-            👥 Tim Pengembang — Kelompok 5
-        </p>
-        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">1. Diaz Aqilia Ghyfary</p>
-        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">2. Izamary Layla Muzdalifah</p>
-        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">3. Nicholas Kusuma Irwana P.</p>
-        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">4. Nida Nafisah Herlistyo</p>
-        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">5. Ridha Putra Pertama</p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
 # Identitas tim juga ditampilkan di sidebar agar selalu terlihat di setiap halaman
 with st.sidebar:
