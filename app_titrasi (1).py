@@ -1,4 +1,6 @@
 import streamlit as st
+import base64
+from pathlib import Path
 
 # ─────────────────────────────────────────────
 # PAGE CONFIG
@@ -8,6 +10,77 @@ st.set_page_config(
     page_icon="⚛️",
     layout="centered",
 )
+
+# ─────────────────────────────────────────────
+# FOTO LATAR BELAKANG (LABORATORIUM)
+# Letakkan file foto di: assets/lab_background.jpg
+# (satu folder dengan file app_titrasi.py ini)
+# ─────────────────────────────────────────────
+ASSET_DIR = Path(__file__).parent / "assets"
+BG_IMAGE_PATH = ASSET_DIR / "lab_background.jpg"
+
+
+@st.cache_data
+def _muat_base64(path: Path) -> str:
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+
+_BG_B64 = _muat_base64(BG_IMAGE_PATH) if BG_IMAGE_PATH.exists() else ""
+
+# Palet warna "tema" untuk tiap aktivitas/menu (disamakan dengan warna kartu
+# rekomendasi yang sudah ada di aplikasi) supaya latar belakang foto lab ini
+# ikut "hidup" / menyesuaikan suasana sesuai apa yang sedang dikerjakan user.
+TEMA_WARNA = {
+    "default":        "50,140,193",   # biru   - tampilan awal / netral
+    "standarisasi":   "0,137,123",    # teal   - fitur perhitungan standarisasi
+    "asam_basa":      "229,57,53",    # merah  - titrasi asam-basa
+    "redoks_kmno4":   "142,36,170",   # ungu   - permanganometri
+    "redoks_iodo":    "0,137,123",    # teal   - iodometri/iodimetri
+    "kompleksometri": "142,36,170",   # ungu   - EDTA
+    "argentometri_mohr":    "249,168,37",  # kuning - Mohr
+    "argentometri_volhard": "229,57,53",   # merah  - Volhard
+    "argentometri_fajans":  "67,160,71",   # hijau  - Fajans
+}
+
+
+def set_background(tema: str = "default", opacity: float = 0.42):
+    """Memasang foto laboratorium sebagai latar belakang aplikasi, dengan
+    lapisan warna (tint) yang berubah‑ubah secara halus mengikuti menu/aktivitas
+    yang sedang dipilih oleh pengguna."""
+    if not _BG_B64:
+        return
+    accent = TEMA_WARNA.get(tema, TEMA_WARNA["default"])
+    st.markdown(
+        f"""
+        <style>
+        [data-testid="stAppViewContainer"] {{
+            background-image:
+                linear-gradient(135deg, rgba(7,18,32,0.66) 0%, rgba({accent},{opacity}) 100%),
+                url("data:image/jpeg;base64,{_BG_B64}");
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            transition: background 0.7s ease-in-out;
+        }}
+        [data-testid="stHeader"] {{
+            background: rgba(0,0,0,0) !important;
+        }}
+        [data-testid="stSidebar"] {{
+            background: linear-gradient(180deg, rgba(11,60,93,0.92), rgba(50,140,193,0.92));
+        }}
+        [data-testid="stSidebar"] * {{
+            color: #ffffff !important;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+# Pasang latar belakang versi default sejak awal (sebelum user memilih apa pun)
+set_background("default")
 
 page_bg_img = """
 <style>
@@ -102,11 +175,15 @@ div[data-baseweb="input"] button {
 
 
 /* ==================== 3. KONTEN LAINNYA ==================== */
-/* Lapisan putih transparan di tengah agar teks konten mudah dibaca */
+/* Lapisan putih semi-transparan ("kaca") di tengah agar teks tetap mudah
+   dibaca walau latar belakang berupa foto laboratorium */
 .main .block-container {
-    background: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.80);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     padding: 2rem;
-    border-radius: 15px;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
 
 /* Tabel markdown */
@@ -254,6 +331,62 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# ─────────────────────────────────────────────
+# TENTANG APLIKASI
+# ─────────────────────────────────────────────
+st.markdown(
+    """
+    <div class="custom-white-box" style="text-align:justify;">
+        <p style="margin:0; color:black !important; font-weight:bold !important; font-size:1em; line-height:1.6;">
+            ℹ️ Aplikasi ini dirancang khusus untuk membantu mahasiswa
+            <span style="color:#0b3c5d;">Politeknik AKA Bogor</span> dalam menentukan indikator
+            titrasi yang tepat berdasarkan <span style="color:#0b3c5d;">jenis titrasi, pH titik
+            ekuivalen, serta karakteristik asam–basa larutan</span>. Selain memberikan
+            rekomendasi indikator secara otomatis, aplikasi ini juga dilengkapi fitur
+            <span style="color:#0b3c5d;">perhitungan standardisasi larutan</span> untuk membantu
+            memperoleh konsentrasi larutan standar.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# ─────────────────────────────────────────────
+# IDENTITAS PEMBUAT APLIKASI (TIM PENGEMBANG)
+# ─────────────────────────────────────────────
+st.markdown(
+    """
+    <div class="custom-white-box" style="border-left:6px solid #0b3c5d;">
+        <p style="margin:0 0 10px 0; color:#0b3c5d !important; font-weight:900 !important; font-size:1.05em;">
+            👥 Tim Pengembang — Kelompok 5
+        </p>
+        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">1. Diaz Aqilia Ghyfary</p>
+        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">2. Izamary Layla Muzdalifah</p>
+        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">3. Nicholas Kusuma Irwana P.</p>
+        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">4. Nida Nafisah Herlistyo</p>
+        <p style="margin:2px 0; color:black !important; font-weight:bold !important;">5. Ridha Putra Pertama</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Identitas tim juga ditampilkan di sidebar agar selalu terlihat di setiap halaman
+with st.sidebar:
+    st.markdown("### ⚛️ Tentang Aplikasi")
+    st.markdown(
+        "Sistem rekomendasi indikator titrasi & perhitungan standardisasi larutan "
+        "untuk mahasiswa **Politeknik AKA Bogor**."
+    )
+    st.markdown("---")
+    st.markdown("### 👥 Tim Pengembang")
+    st.markdown(
+        "1. Diaz Aqilia Ghyfary\n"
+        "2. Izamary Layla Muzdalifah\n"
+        "3. Nicholas Kusuma Irwana P.\n"
+        "4. Nida Nafisah Herlistyo\n"
+        "5. Ridha Putra Pertama"
+    )
+
 
 # ─────────────────────────────────────────────
 # HELPER FUNCTIONS
@@ -290,6 +423,9 @@ fitur = st.radio(
         "MENGHITUNG STANDARISASI LARUTAN"
     ]
 )
+
+# Latar belakang menyesuaikan menu utama yang sedang dipilih
+set_background("standarisasi" if fitur == "MENGHITUNG STANDARISASI LARUTAN" else "default")
 
 st.divider()
 
@@ -406,6 +542,7 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
     st.divider()
 
     if pilih_jenis == "🔴 JENIS TITRASI ASAM-BASA":
+        set_background("asam_basa")
         st.subheader("🔴 JENIS TITRASI ASAM-BASA")
         col1, col2 = st.columns(2)
 
@@ -461,6 +598,7 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
             horizontal=True,
             label_visibility="collapsed",
         )
+        set_background("redoks_kmno4" if metode == "Permanganometri" else "redoks_iodo")
         st.divider()
         st.subheader("💡 Rekomendasi Indikator")
 
