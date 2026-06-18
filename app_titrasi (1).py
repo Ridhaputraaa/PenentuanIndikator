@@ -161,6 +161,14 @@ table, th, td {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+/* Background Utama Aplikasi Tetap Gambar */
+.stApp {
+    background-image: url("https://raw.githubusercontent.com/diazghyfary-boop/proyekdiaz137/6095178605cf20666f82dd24e2ef5ab90b4c2495/Screenshot_20260617_213235_Gallery.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 </style>
 """
 
