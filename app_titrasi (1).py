@@ -92,7 +92,7 @@ div[data-baseweb="select"] div {
     font-weight: bold !important;
 }
 
-/* 🛠️ PERBAIKAN: Modifikasi khusus kotak Number Input supaya latar belakang putih dan teks diketik berwarna HITAM */
+/* Modifikasi khusus kotak Number Input supaya latar belakang putih dan teks diketik berwarna HITAM */
 div[data-baseweb="input"] {
     background-color: #ffffff !important;
     border: 2px solid #328cc1 !important;
@@ -208,37 +208,8 @@ li[role="option"]:hover {
 """
 st.markdown(page_styles, unsafe_allow_html=True)
 
+# Set background awal
 set_background("default")
-
-# ─────────────────────────────────────────────
-# BANNER ATAS & DEFINISI TIM SIDEBAR
-# ─────────────────────────────────────────────
-st.markdown(
-    """
-    <div class="banner">
-        <h1>👩🏻‍🔬 Sistem Perhitungan Standarisasi Larutan dan Rekomendasi Indikator Titrasi</h1>
-        <p>Pilih jenis titrasi → Ikuti langkah → Dapatkan rekomendasi indikator</p>
-        <p>Pilih jenis metode standarisasi → Masukkan nilainya → Dapatkan hasil perhitungannya</p>
-    </div>
-    <div class="custom-white-box" style="text-align:justify;">
-        <p style="margin:0; line-height:1.6;">
-            ℹ️ Aplikasi ini dirancang khusus untuk membantu mahasiswa
-            <span style="color:#0b3c5d;">Politeknik AKA Bogor</span> dalam menentukan indikator
-            titrasi yang tepat berdasarkan jenis titrasi, pH titik ekuivalen, serta karakteristik asam–basa larutan. 
-            Selain memberikan rekomendasi indikator secara otomatis, aplikasi ini juga dilengkapi fitur 
-            <span style="color:#0b3c5d;">perhitungan standardisasi larutan</span> untuk membantu memperoleh konsentrasi larutan standar.
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-with st.sidebar:
-    st.markdown("### ⚛️ Tentang Aplikasi")
-    st.markdown("Sistem rekomendasi indikator titrasi & perhitungan standardisasi larutan untuk mahasiswa **Politeknik AKA Bogor**.")
-    st.markdown("---")
-    st.markdown("### 👥 Tim Pengembang")
-    st.markdown("1. Diaz Aqilia Ghyfary\n2. Izamary Layla Muzdalifah\n3. Nicholas Kusuma Irwana P.\n4. Nida Nafisah Herlistyo\n5. Ridha Putra Pertama")
 
 # ─────────────────────────────────────────────
 # HELPER FUNCTIONS
@@ -259,16 +230,59 @@ def step(n, label):
     st.markdown(f"**{label}**")
 
 # ─────────────────────────────────────────────
-# TENTUKAN MENU AKTIVITAS
+# SIDEBAR NAVIGATION (MENU HALAMAN SEPERTI DI GAMBAR)
 # ─────────────────────────────────────────────
-st.markdown("### 🎯 Pilih Tujuan")
-fitur = st.radio("", ["MENENTUKAN INDIKATOR TITRASI", "MENGHITUNG STANDARISASI LARUTAN"], label_visibility="collapsed")
-st.divider()
+with st.sidebar:
+    st.markdown("### 🔮 Sistem Rekomendasi Titrasi")
+    st.markdown("#### 📋 Menu Halaman")
+    fitur = st.radio(
+        "",
+        ["🏠 Beranda", "🔴 Menentukan Indikator Titrasi", "🧪 Menghitung Standarisasi Larutan"],
+        label_visibility="collapsed"
+    )
+    st.markdown("---")
+    st.markdown("🧪 **Sistem Rekomendasi Titrasi**")
+    st.markdown("Dibuat oleh Kelompok 5")
 
 # ─────────────────────────────────────────────
-# FITUR 1 — STANDARISASI LARUTAN
+# HALAMAN 1 — BERANDA (WELCOME PAGE SESUAI GAMBAR)
 # ─────────────────────────────────────────────
-if fitur == "MENGHITUNG STANDARISASI LARUTAN":
+if fitur == "🏠 Beranda":
+    set_background("default")
+    st.markdown(
+        """
+        <div class="banner">
+            <h2>👩🏻‍💼 Sistem Rekomendasi Titrasi</h2>
+            <p style="font-size:0.9em; color:#1d5f8a;">Pilih jenis titrasi → Ikuti langkah → Dapatkan rekomendasi indikator</p>
+            <p style="font-size:0.9em; color:#1d5f8a;">Pilih jenis metode standarisasi → Masukkan nilainya → Dapatkan hasil perhitungannya</p>
+        </div>
+        
+        <div class="custom-white-box" style="text-align: center; padding: 30px 20px;">
+            <h2 style="color: #0b3c5d; font-size: 1.8em;">👋 SELAMAT DATANG DI PROGRAM APLIKASI KAMI</h2>
+            <p style="margin: 15px 0; color: #555555; font-size: 1.1em;">DARI</p>
+            <h1 style="color: #0b3c5d; font-size: 2.2em; letter-spacing: 2px;">⚜️ KELOMPOK 5 ⚜️</h1>
+            <h3 style="color: #1d5f8a; font-size: 1.4em; margin-top: 10px;">KELAS 1D</h3>
+            <hr style="border: 0; border-top: 1px solid #ddd; margin: 30px 0;">
+            
+            <div style="text-align: left; max-width: 450px; margin: 0 auto;">
+                <h4 style="color: #0b3c5d; border-bottom: 2px solid #0b3c5d; padding-bottom: 5px; margin-bottom: 15px;">👥 NAMA-NAMA ANGGOTA:</h4>
+                <ol style="line-height: 2; font-size: 1.05em; color: #111111; font-weight: bold;">
+                    <li>DIAZ AQILIA GHYFARY <span style="color: #666; font-weight: normal;">(2560610)</span></li>
+                    <li>Izamary Layla Muzdalifah <span style="color: #666; font-weight: normal;">(2560647)</span></li>
+                    <li>Nicholas Kusuma Irwana P <span style="color: #666; font-weight: normal;">(2560725)</span></li>
+                    <li>Nida Nafisah Herlistyo <span style="color: #666; font-weight: normal;">(2560726)</span></li>
+                    <li>Ridha Putra Pratama <span style="color: #666; font-weight: normal;">(2560754)</span></li>
+                </ol>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+# ─────────────────────────────────────────────
+# HALAMAN 2 — STANDARISASI LARUTAN
+# ─────────────────────────────────────────────
+elif fitur == "🧪 Menghitung Standarisasi Larutan":
     set_background("standarisasi")
     st.subheader("🧪 PERHITUNGAN STANDARISASI LARUTAN")
     metode = st.selectbox(
@@ -312,9 +326,9 @@ if fitur == "MENGHITUNG STANDARISASI LARUTAN":
                 st.error("Volume tidak boleh 0.")
 
 # ─────────────────────────────────────────────
-# FITUR 2 — MENENTUKAN INDIKATOR TITRASI
+# HALAMAN 3 — MENENTUKAN INDIKATOR TITRASI
 # ─────────────────────────────────────────────
-elif fitur == "MENENTUKAN INDIKATOR TITRASI":
+elif fitur == "🔴 Menentukan Indikator Titrasi":
     st.subheader("🧪 PILIH JENIS TITRASI")
     pilih_jenis = st.selectbox(
         "Jenis Titrasi", 
@@ -433,7 +447,7 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         )
 
 # ─────────────────────────────────────────────
-# FOOTER
+# FOOTER (DI SEMUA HALAMAN)
 # ─────────────────────────────────────────────
 st.divider()
 st.markdown(
