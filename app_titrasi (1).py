@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# CONFIGURASI BACKGROUND (MENGGUNAKAN GAMBAR GITHUB ANDA)
+# CONFIGURASI BACKGROUND (MENGGUNAKAN GAMBAR UNGGAHAN ANDA)
 # ─────────────────────────────────────────────
 ASSET_DIR = Path(__file__).parent / "assets"
 BG_IMAGE_PATH = ASSET_DIR / "lab_background.jpg"
@@ -22,13 +22,14 @@ def _muat_base64(path: Path) -> str:
     with open(path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-#Latar Belakang utama
+# Jika file gambar disimpan lokal di folder assets, gunakan base64.
+# Jika tidak ada, kode otomatis mengambil gambar laboratorium biru estetik yang Anda inginkan.
 if BG_IMAGE_PATH.exists():
     _BG_B64 = _muat_base64(BG_IMAGE_PATH)
     bg_src = f'url("data:image/jpeg;base64,{_BG_B64}")'
 else:
-    # memunculkan gambar utama
-    bg_src = 'url("https://raw.githubusercontent.com/Ridhaputraaa/PenentuanIndikator/blob/174a223ba46498957ef8294ead24a9ce15982bb2/Gambar%20titrasi%20LPK.jpeg")'
+    # URL gambar laboratorium biru estetik sesuai unggahan Anda
+    bg_src = 'url("https://raw.githubusercontent.com/Ridhaputraaa/PenentuanIndikator/main/Gambar%20titrasi%20LPK.jpeg")'
 
 # Palet warna tema dinamis untuk pencampuran gradasi latar belakang
 TEMA_WARNA = {
@@ -43,14 +44,14 @@ TEMA_WARNA = {
     "argentometri_fajans":  "67,160,71",
 }
 
-def set_background(tema: str = "default", opacity: float = 0.50):
+def set_background(tema: str = "default", opacity: float = 0.35):
     accent = TEMA_WARNA.get(tema, TEMA_WARNA["default"])
     st.markdown(
         f"""
         <style>
         .stApp, [data-testid="stAppViewContainer"] {{
             background-image:
-                linear-gradient(135deg, rgba(7,18,32,0.72) 0%, rgba({accent},{opacity}) 100%),
+                linear-gradient(135deg, rgba(7,18,32,0.65) 0%, rgba({accent},{opacity}) 100%),
                 {bg_src} !important;
             background-size: cover !important;
             background-position: center center !important;
@@ -83,7 +84,7 @@ p, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label {
     font-weight: bold !important;
 }
 
-/* Modifikasi kotak input agar teks yang diketik berwarna PUTIH (kontras dengan warna biru tua) */
+/* Modifikasi kotak input agar teks berwarna PUTIH kontras dengan warna biru tua */
 div[data-baseweb="select"] > div, div[data-baseweb="input"] {
     background: linear-gradient(135deg, #0b3c5d 0%, #1d5f8a 100%) !important;
     border: 2px solid #328cc1 !important;
@@ -114,7 +115,7 @@ li[role="option"]:hover {
 
 /* Container Transparan Utama */
 .main .block-container {
-    background: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,0.90);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     padding: 2.5rem;
