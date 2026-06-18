@@ -164,11 +164,12 @@ table, th, td {
 
 /* Background Utama Aplikasi Tetap Gambar */
 .stApp {
-    background-image: url("https://raw.githubusercontent.com/diazghyfary-boop/proyekdiaz137/6095178605cf20666f82dd24e2ef5ab90b4c2495/Screenshot_20260617_213235_Gallery.jpg");
+    background-image: url("https://raw.githubusercontent.com/Ridhaputraaa/PenentuanIndikator/blob/6e039088433022d29e4048d5a62744b4730209c0/Gambar%20titrasi%20LPK.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    }
 </style>
 """
 
