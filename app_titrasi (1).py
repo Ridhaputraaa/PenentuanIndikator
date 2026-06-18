@@ -359,4 +359,90 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         st.subheader("💡 Rekomendasi Indikator")
         if metode == "Permanganometri":
             card("KMnO₄ — Autoindicator", ["Zat peniter bertindak langsung sebagai indikator", "Titik akhir: Merah muda seulas bertahan 30 detik", "Kondisi: Suasana asam encer (H₂SO₄)"], "purple", True)
-            card("Ferroin",
+            card("Ferroin", ["Menggunakan kompleks 1,10-fenantrolin", "Perubahan warna: Merah (tereduksi) → Biru Pucat (teroksidasi)"], "red")
+        else:
+            card("Larutan Kanji (Amilum)", ["Membentuk kompleks amilum-iodin", "Perubahan: Biru Tua → Tidak Berwarna (pada Iodometri)"], "teal", True)
+            warn("Tambahkan larutan kanji **menjelang titik akhir** (saat larutan berwarna kuning jerami pucat) agar kompleks tidak merusak ketajaman TA.")
+        done()
+
+    elif pilih_jenis == "🟣 TITRASI KOMPLEKSOMETRI":
+        set_background("kompleksometri")
+        st.subheader("🟣 TITRASI KOMPLEKSOMETRI (EDTA)")
+        step(2, "Pilih Ion Logam yang Dititrasi")
+        ION_DATA = {
+            "Ca²⁺ / Mg²⁺": [("EBT (Eriochrome Black T)", ["Kondisi: pH 10 (Buffer Amonia)", "Perubahan: Merah Anggur → Biru murni"], "teal", True)],
+            "Zn²⁺": [("EBT (Eriochrome Black T)", ["Kondisi: pH 10 (Buffer)", "Perubahan: Merah Anggur → Biru"], "teal", True)],
+            "Cu²⁺": [("Murexide", ["Kondisi: pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True)],
+            "Fe²⁺ / Fe³⁺": [
+                ("Asam Salisilat", ["Kondisi: pH 1–2 (Suasana sangat asam)", "Perubahan: Merah/Ungu gelap → Tidak Berwarna"], "red", True),
+                ("Tiron", ["Kondisi: pH 4–10", "Perubahan: Biru → Tidak Berwarna"], "teal", False)
+            ],
+            "Pb²⁺": [("Xylenol Orange", ["Kondisi: pH 5–6 (Buffer Heksamin)", "Perubahan: Merah-Ungu → Kuning"], "orange", True)],
+        }
+        ion = st.selectbox("Ion Logam", ["── Pilih Ion Logam ──"] + list(ION_DATA.keys()), label_visibility="collapsed")
+        if ion != "── Pilih Ion Logam ──":
+            st.divider()
+            st.subheader(f"💡 Rekomendasi Indikator untuk {ion}")
+            for name, rows, color, starred in ION_DATA[ion]:
+                card(name, rows, color, starred)
+            done()
+
+    elif pilih_jenis == "🟢 TITRASI ARGENTOMETRI":
+        st.subheader("🟢 TITRASI ARGENTOMETRI")
+        step(2, "PILIH METODE ARGENTOMETRI")
+        metode = st.radio("Metode", ["Argentometri (Mohr)", "Argentometri (Volhard)", "Argentometri (Fajans)"], horizontal=True, label_visibility="collapsed")
+        st.divider()
+        st.subheader("💡 Rekomendasi Indikator")
+        if metode == "Argentometri (Mohr)":
+            set_background("argentometri_mohr")
+            card("Kalium Kromat (K₂CrO₄)", ["Kondisi: pH netral hingga sedikit basa (6.5 - 10.0)", "Titik akhir: Terbentuk endapan Merah Bata (Ag₂CrO₄)"], "yellow", True)
+            warn("Hindari suasana asam (kromat berubah jadi dikromat) maupun basa kuat (terbentuk endapan cokelat AgOH).")
+        elif metode == "Argentometri (Volhard)":
+            set_background("argentometri_volhard")
+            card("Besi(III) Amonium Sulfat", ["Kondisi: Suasana asam kuat (HNO₃)", "Titik akhir: Terbentuk kompleks larutan Merah (FeSCN²⁺)"], "red", True)
+        else:
+            set_background("argentometri_fajans")
+            card("Diklorofluoresein", ["Kondisi: pH 4.0 – 10.0", "Mekanisme: Indikator Adsorpsi pada permukaan endapan", "Titik akhir: Endapan berubah warna menjadi Merah Muda"], "green", True)
+        done()
+        
+    else:
+        set_background("default")
+        st.info("👆 Pilih jenis titrasi di atas untuk memulai.", icon="⚠️")
+        st.markdown(
+            """
+            <div class="custom-white-box">
+                <p style="margin-bottom: 8px;"><b>Panduan Singkat Lapangan:</b></p>
+                <table style="width:100%; border-collapse: collapse; color: black;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #0b3c5d;">
+                            <th style="text-align:left; padding: 8px;">Jenis</th>
+                            <th style="text-align:left; padding: 8px;">Titran Umum</th>
+                            <th style="text-align:left; padding: 8px;">Aplikasi Analit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #ddd;"><td style="padding: 8px;">Asam-Basa</td><td style="padding: 8px;">NaOH / HCl</td><td style="padding: 8px;">Asam Cuka, Soda Abu</td></tr>
+                        <tr style="border-bottom: 1px solid #ddd;"><td style="padding: 8px;">Redoks</td><td style="padding: 8px;">KMnO₄ / Na₂S₂O₃</td><td style="padding: 8px;">Besi(II), Vitamin C, Iod</td></tr>
+                        <tr style="border-bottom: 1px solid #ddd;"><td style="padding: 8px;">Kompleksometri</td><td style="padding: 8px;">EDTA</td><td style="padding: 8px;">Kesadahan Air (Ca²⁺, Mg²⁺)</td></tr>
+                        <tr><td style="padding: 8px;">Argentometri</td><td style="padding: 8px;">AgNO₃</td><td style="padding: 8px;">Kadar Garam Cl⁻</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+# ─────────────────────────────────────────────
+# FOOTER
+# ─────────────────────────────────────────────
+st.divider()
+st.markdown(
+    """
+    <div class="custom-white-box" style="text-align:center; max-width: 400px; margin: 0 auto;">
+        <span style='color: #0b3c5d !important; font-weight: 900 !important; font-size: .9em;'>
+            ⚛️ Sistem Rekomendasi Titrasi &nbsp;|&nbsp; Kelompok 5 Politeknik AKA
+        </span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
