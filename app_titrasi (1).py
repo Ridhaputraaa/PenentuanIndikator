@@ -22,13 +22,13 @@ def _muat_base64(path: Path) -> str:
     with open(path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-# Logika fallback: Menggunakan aset lokal jika ada, jika tidak ada tembak link RAW GitHub Anda
+#Latar Belakang utama
 if BG_IMAGE_PATH.exists():
     _BG_B64 = _muat_base64(BG_IMAGE_PATH)
     bg_src = f'url("data:image/jpeg;base64,{_BG_B64}")'
 else:
-    # URL RAW dari repositori proyekdiaz137 Anda agar gambar pasti muncul
-    bg_src = 'url("https://raw.githubusercontent.com/diazghyfary-boop/proyekdiaz137/main/Screenshot_20260617_213235_Gallery.jpg")'
+    # memunculkan gambar utama
+    bg_src = 'url("https://raw.githubusercontent.com/Ridhaputraaa/PenentuanIndikator/blob/174a223ba46498957ef8294ead24a9ce15982bb2/Gambar%20titrasi%20LPK.jpeg")'
 
 # Palet warna tema dinamis untuk pencampuran gradasi latar belakang
 TEMA_WARNA = {
